@@ -1,0 +1,1414 @@
+<title>Peta Jalan Menuju Doktor</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100,600;100,700;112,700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: tujuh tahap berupa panel lipat; tiap panel berisi kartu minggu/bulan/kuartal yang bisa dicentang. Panduan cara belajar di atas, istilah di bawah. */
+:root {
+  --bg: #F1F5F7;
+  --surface: #FFFFFF;
+  --ink: #10252F;
+  --muted: #4F646E;
+  --line: #CBD7DD;
+  --accent: #0A6A84;
+  --accent-soft: #DDEFF4;
+  --prep: #6F8D9A;
+  --on-accent: #FFFFFF;
+  --f-display: "Archivo", "Arial Narrow", system-ui, sans-serif;
+  --f-body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0C1A21; --surface: #132630; --ink: #E3EDF1; --muted: #9AB0B9;
+    --line: #2B4551; --accent: #55C5DE; --accent-soft: #15333E; --prep: #4C6773; --on-accent: #06222B;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0C1A21; --surface: #132630; --ink: #E3EDF1; --muted: #9AB0B9;
+  --line: #2B4551; --accent: #55C5DE; --accent-soft: #15333E; --prep: #4C6773; --on-accent: #06222B;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 4.2rem; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body {
+  background: var(--bg); color: var(--ink);
+  font-family: var(--f-body); font-size: 16px; line-height: 1.6;
+  padding-block: 0 4rem;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  -webkit-text-size-adjust: 100%;
+}
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); background: var(--bg); z-index: 10; }
+.wrap { max-width: 820px; margin: 0 auto; }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; border-radius: 3px; }
+
+header.top { padding-block: 2.5rem 1.25rem; display: grid; gap: 1rem; }
+.kicker { font-family: var(--f-mono); font-size: .78rem; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); }
+h1 { font-family: var(--f-display); font-stretch: 112%; font-weight: 700; font-size: clamp(2rem, 6.5vw, 3.3rem); line-height: 1.05; margin: 0; text-wrap: balance; letter-spacing: -.01em; }
+.lead { color: var(--muted); max-width: 62ch; margin: 0; font-size: 1.05rem; }
+.bar { display: flex; gap: 3px; height: 14px; margin-top: .5rem; }
+.bar i { display: block; border-radius: 3px; background: var(--accent); }
+.bar i.p { background: var(--prep); }
+.scale-cap { display: flex; justify-content: space-between; gap: 1rem; margin-top: .45rem; font-family: var(--f-mono); font-size: .74rem; color: var(--muted); letter-spacing: .03em; }
+.scale-cap span:first-child { flex: 0 0 20%; }
+.scale-cap span:last-child { flex: 1; text-align: right; }
+
+nav.top2 { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; background: var(--bg); border-bottom: 1px solid var(--line); margin-inline: calc(-1 * max(16px, env(safe-area-inset-left, 0px))); padding-inline: max(16px, env(safe-area-inset-left, 0px)); }
+nav.top2 ul { display: flex; gap: .25rem; list-style: none; margin: 0 auto; padding: .5rem 0; max-width: 820px; overflow-x: auto; scrollbar-width: none; }
+nav.top2 a { display: block; white-space: nowrap; padding: .35rem .7rem; border-radius: 999px; font-size: .86rem; color: var(--muted); text-decoration: none; font-weight: 500; }
+nav.top2 a:hover { background: var(--accent-soft); color: var(--ink); }
+
+section.blk { padding-top: 2.5rem; }
+h2.h { font-family: var(--f-display); font-weight: 700; font-size: clamp(1.4rem, 4vw, 1.9rem); line-height: 1.15; margin: 0 0 .6rem; text-wrap: balance; }
+p { margin: 0 0 1rem; max-width: 70ch; }
+.note { color: var(--muted); font-size: .9rem; }
+
+/* cara belajar */
+ol.steps { list-style: none; counter-reset: s; margin: 1rem 0 0; padding: 0; display: grid; gap: .6rem; }
+ol.steps li { counter-increment: s; display: grid; grid-template-columns: 2rem minmax(0, 1fr) auto; gap: .75rem; align-items: baseline; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: .7rem 1rem; }
+ol.steps li::before { content: counter(s); font-family: var(--f-mono); font-weight: 500; color: var(--accent); }
+ol.steps b { font-family: var(--f-display); font-weight: 600; }
+ol.steps .t { font-family: var(--f-mono); font-size: .8rem; color: var(--muted); white-space: nowrap; }
+@media (max-width: 520px) { ol.steps li { grid-template-columns: 1.6rem minmax(0, 1fr); } ol.steps .t { grid-column: 2; } }
+.stuck { margin-top: 1rem; background: var(--accent-soft); border: 1px solid var(--accent); border-radius: 8px; padding: .8rem 1.1rem; }
+.stuck b { font-family: var(--f-mono); font-size: .76rem; letter-spacing: .06em; text-transform: uppercase; color: var(--accent); display: block; margin-bottom: .2rem; }
+.stuck p { margin: 0; font-size: .95rem; }
+
+.tools { display: flex; flex-wrap: wrap; gap: .5rem; margin: 1.5rem 0 .75rem; align-items: center; }
+.tools button { font: inherit; font-size: .88rem; background: var(--surface); color: var(--ink); border: 1px solid var(--line); border-radius: 6px; padding: .35rem .8rem; cursor: pointer; }
+.tools button:hover { border-color: var(--accent); }
+.tools .sum { margin-left: auto; font-family: var(--f-mono); font-size: .8rem; color: var(--muted); }
+
+/* tahap */
+details.stage { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; margin-bottom: .9rem; }
+details.stage > summary { list-style: none; cursor: pointer; display: grid; grid-template-columns: 2rem minmax(0, 1fr) auto; gap: .8rem; align-items: center; padding: .9rem 1rem; }
+details.stage > summary::-webkit-details-marker { display: none; }
+.node { width: 1.9rem; height: 1.9rem; border-radius: 50%; background: var(--prep); color: var(--on-accent); font-family: var(--f-mono); font-size: .8rem; font-weight: 500; display: grid; place-items: center; }
+details.stage.d .node { background: var(--accent); }
+.sh .when { font-family: var(--f-mono); font-size: .72rem; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.sh .when b { color: var(--accent); font-weight: 500; }
+.sh h3 { font-family: var(--f-display); font-weight: 700; font-size: 1.12rem; line-height: 1.25; margin: .1rem 0 0; text-wrap: balance; }
+.cnt { font-family: var(--f-mono); font-size: .76rem; color: var(--muted); white-space: nowrap; display: flex; align-items: center; gap: .6rem; }
+.cnt::after { content: ""; width: .55rem; height: .55rem; border-right: 2px solid var(--muted); border-bottom: 2px solid var(--muted); transform: rotate(45deg); transition: transform .15s; margin-bottom: .2rem; }
+details[open] > summary .cnt::after { transform: rotate(-135deg); margin-bottom: -.15rem; }
+@media (prefers-reduced-motion: reduce) { .cnt::after { transition: none; } }
+@media (max-width: 480px) { details.stage > summary { grid-template-columns: 2rem minmax(0, 1fr); } .cnt { grid-column: 2; } }
+.body { padding: 0 1rem 1rem; display: grid; gap: .75rem; }
+.sumry { border-top: 1px solid var(--line); padding-top: .9rem; display: grid; gap: .5rem; font-size: .95rem; }
+
+.row { display: grid; grid-template-columns: 5.2rem minmax(0, 1fr); gap: .6rem; font-size: .93rem; }
+.row i { font-style: normal; font-family: var(--f-mono); font-size: .7rem; letter-spacing: .05em; text-transform: uppercase; color: var(--muted); padding-top: .22rem; }
+.row p, .row ul { margin: 0; max-width: none; }
+.row ul { padding-left: 1.1rem; display: grid; gap: .15rem; }
+.row.out p { font-weight: 500; }
+@media (max-width: 520px) { .row { grid-template-columns: 1fr; gap: 0; } }
+
+.item { background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: .8rem .9rem; display: grid; gap: .5rem; }
+.item.done { opacity: .72; }
+.ih { display: grid; grid-template-columns: 1.6rem minmax(0, 1fr); gap: .5rem; align-items: start; cursor: pointer; }
+.ih input { width: 1.15rem; height: 1.15rem; margin-top: .25rem; accent-color: var(--accent); }
+.ih span { font-family: var(--f-display); font-weight: 600; font-size: 1rem; line-height: 1.35; }
+.ih small { font-family: var(--f-mono); font-weight: 500; font-size: .74rem; letter-spacing: .05em; text-transform: uppercase; color: var(--accent); margin-right: .45rem; }
+.item .row { padding-left: 2.1rem; }
+@media (max-width: 520px) { .item .row { padding-left: 0; } }
+
+.gate { display: grid; grid-template-columns: 1.6rem minmax(0, 1fr); gap: .5rem; align-items: start; background: var(--accent-soft); border: 1px solid var(--accent); border-radius: 8px; padding: .75rem .9rem; cursor: pointer; }
+.gate input { width: 1.15rem; height: 1.15rem; margin-top: .2rem; accent-color: var(--accent); }
+.gate small { display: block; font-family: var(--f-mono); font-size: .72rem; letter-spacing: .06em; text-transform: uppercase; color: var(--accent); }
+
+.prog-box { margin-top: 1.25rem; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: .9rem 1.1rem; }
+.prog { height: 8px; background: var(--line); border-radius: 99px; overflow: hidden; margin-top: .4rem; }
+.prog div { height: 100%; background: var(--accent); width: 0; transition: width .25s; }
+@media (prefers-reduced-motion: reduce) { .prog div { transition: none; } }
+
+dl.gl { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: .6rem; margin: 1rem 0 0; }
+dl.gl div { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: .65rem .9rem; }
+dl.gl dt { font-family: var(--f-mono); font-weight: 500; font-size: .85rem; color: var(--accent); }
+dl.gl dd { margin: .1rem 0 0; font-size: .9rem; }
+.hab { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: .6rem; margin-top: 1rem; }
+.hab div { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: .75rem .95rem; font-size: .92rem; }
+.hab b { display: block; font-family: var(--f-display); font-weight: 600; margin-bottom: .1rem; }
+.row ol, .mb ol { margin: 0; padding-left: 1.2rem; display: grid; gap: .25rem; max-width: none; }
+.row ol li::marker, .mb ol li::marker { color: var(--accent); font-family: var(--f-mono); font-size: .85em; }
+/* modul python dan ml */
+.flow { display: flex; flex-wrap: wrap; gap: .4rem .25rem; list-style: none; padding: 0; margin: 1rem 0 0; font-size: .85rem; }
+.flow li { background: var(--surface); border: 1px solid var(--line); border-radius: 999px; padding: .2rem .7rem; }
+.flow li:not(:last-child)::after { content: "→"; color: var(--accent); margin-left: .55rem; }
+.mods { display: grid; gap: .8rem; margin-top: 1.25rem; }
+details.mod { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; }
+details.mod > summary { list-style: none; cursor: pointer; display: grid; grid-template-columns: 2.4rem minmax(0, 1fr) auto; gap: .8rem; align-items: center; padding: .8rem 1rem; }
+details.mod > summary::-webkit-details-marker { display: none; }
+.mn { font-family: var(--f-mono); font-weight: 500; color: var(--accent); font-size: .95rem; }
+.mt { font-family: var(--f-display); font-weight: 600; line-height: 1.3; }
+.mt small { display: block; font-family: var(--f-mono); font-weight: 400; font-size: .72rem; letter-spacing: .05em; text-transform: uppercase; color: var(--muted); }
+.mdur { font-family: var(--f-mono); font-size: .76rem; color: var(--muted); white-space: nowrap; }
+@media (max-width: 480px) { details.mod > summary { grid-template-columns: 2rem minmax(0, 1fr); } .mdur { grid-column: 2; } }
+.mb { border-top: 1px solid var(--line); padding: .9rem 1rem 1rem; display: grid; gap: 1rem; }
+.mb h4 { font-family: var(--f-mono); font-size: .72rem; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin: 0 0 .3rem; font-weight: 500; }
+.mb ul { margin: 0; padding-left: 1.1rem; display: grid; gap: .25rem; font-size: .94rem; }
+.mb p { margin: 0; font-size: .94rem; max-width: none; }
+.mb code { background: var(--bg); border: 1px solid var(--line); border-radius: 4px; padding: 0 .25rem; }
+.codewrap { border: 1px solid var(--line); border-radius: 8px; overflow: hidden; background: var(--bg); }
+.codebar { display: flex; justify-content: space-between; align-items: center; gap: .5rem; padding: .3rem .5rem .3rem .8rem; border-bottom: 1px solid var(--line); font-family: var(--f-mono); font-size: .76rem; color: var(--muted); }
+.codebar button { font: inherit; font-size: .76rem; background: var(--surface); color: var(--ink); border: 1px solid var(--line); border-radius: 5px; padding: .15rem .6rem; cursor: pointer; }
+.codebar button:hover { border-color: var(--accent); }
+pre.code { margin: 0; padding: .8rem; overflow-x: auto; font-family: var(--f-mono); font-size: .8rem; line-height: 1.55; tab-size: 4; color: var(--ink); }
+.codewrap.res { background: var(--surface); }
+.warn { background: var(--accent-soft); border: 1px solid var(--accent); border-radius: 8px; padding: .65rem .9rem; font-size: .92rem; }
+.warn b { font-family: var(--f-mono); font-size: .74rem; letter-spacing: .06em; text-transform: uppercase; color: var(--accent); display: block; margin-bottom: .1rem; }
+.setup { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: .75rem; margin-top: 1rem; }
+.setup > div { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: .8rem 1rem; font-size: .93rem; }
+.setup b { font-family: var(--f-display); font-weight: 600; display: block; margin-bottom: .2rem; }
+.setup code, .lat code { font-family: var(--f-mono); font-size: .85em; }
+.lat { margin-top: 1.25rem; }
+.lat ul { margin: .4rem 0 0; padding-left: 1.1rem; display: grid; gap: .25rem; font-size: .94rem; }
+/* sidebar: daftar isi, pencarian, tema */
+.shell { max-width: 1180px; margin: 0 auto; display: grid; grid-template-columns: minmax(0, 1fr); }
+.wrap { width: 100%; min-width: 0; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.menubtn { font: inherit; font-size: .86rem; font-weight: 500; background: var(--accent); color: var(--on-accent); border: 0; border-radius: 999px; padding: .35rem .9rem; cursor: pointer; white-space: nowrap; }
+.side-in { display: grid; gap: 1rem; }
+.side-top { display: flex; justify-content: space-between; align-items: center; gap: .5rem; }
+.brand { font-family: var(--f-display); font-weight: 700; font-size: 1.05rem; line-height: 1.2; }
+.sideclose { font: inherit; font-size: .82rem; background: var(--bg); color: var(--ink); border: 1px solid var(--line); border-radius: 6px; padding: .2rem .65rem; cursor: pointer; }
+.theme { display: flex; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; background: var(--bg); }
+.theme button { flex: 1; font: inherit; font-size: .8rem; padding: .4rem .3rem; border: 0; background: transparent; color: var(--muted); cursor: pointer; }
+.theme button + button { border-left: 1px solid var(--line); }
+.theme button[aria-pressed="true"] { background: var(--accent); color: var(--on-accent); font-weight: 600; }
+.searchbox { position: relative; }
+.searchbox input { width: 100%; font: inherit; font-size: .92rem; background: var(--surface); color: var(--ink); border: 1px solid var(--line); border-radius: 8px; padding: .5rem 2rem .5rem .7rem; }
+.searchbox input::placeholder { color: var(--muted); }
+.kbd { position: absolute; right: .5rem; top: 50%; transform: translateY(-50%); font-family: var(--f-mono); font-size: .72rem; color: var(--muted); border: 1px solid var(--line); border-radius: 4px; padding: 0 .35rem; pointer-events: none; display: none; }
+.resmeta { font-size: .82rem; color: var(--muted); margin: 0 0 .5rem; }
+.reslist { list-style: none; margin: 0; padding: 0; display: grid; gap: .35rem; }
+.reslist a { display: block; text-decoration: none; color: var(--ink); background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: .5rem .65rem; }
+.reslist a:hover, .reslist a:focus-visible { border-color: var(--accent); }
+.reslist small { display: block; font-family: var(--f-mono); font-size: .68rem; letter-spacing: .05em; text-transform: uppercase; color: var(--accent); margin-bottom: .1rem; }
+.reslist b { display: block; font-family: var(--f-display); font-weight: 600; font-size: .88rem; line-height: 1.3; }
+.reslist span { display: block; font-size: .8rem; color: var(--muted); line-height: 1.4; margin-top: .15rem; overflow-wrap: anywhere; }
+mark { background: var(--accent-soft); color: var(--ink); font-weight: 600; border-radius: 2px; padding: 0 .1rem; }
+.toc-h { font-family: var(--f-mono); font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin: 0 0 .4rem; }
+#toc ul { list-style: none; margin: 0; padding: 0; }
+#toc > ul { display: grid; gap: .1rem; }
+#toc ul ul { margin: .1rem 0 .4rem .6rem; border-left: 1px solid var(--line); padding-left: .4rem; }
+#toc a { display: block; text-decoration: none; color: var(--muted); font-size: .88rem; line-height: 1.35; padding: .25rem .5rem; border-radius: 6px; }
+#toc a.l1 { color: var(--ink); font-weight: 600; font-family: var(--f-display); }
+#toc ul ul a { font-size: .82rem; display: -webkit-box; -webkit-line-clamp: 2; line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+#toc a:hover { background: var(--accent-soft); color: var(--ink); }
+#toc a.active { background: var(--accent-soft); color: var(--accent); }
+#toc a.l1.parent { color: var(--accent); }
+.flash { outline: 3px solid var(--accent); outline-offset: 2px; }
+@media (min-width: 1020px) {
+  html { scroll-padding-top: 1.25rem; }
+  .shell { grid-template-columns: 260px minmax(0, 1fr); gap: 0 2.5rem; }
+  aside.side { position: sticky; top: env(safe-area-inset-top, 0px); align-self: start; height: 100vh; overflow-y: auto; padding: 1.75rem .25rem 1.5rem 0; scrollbar-width: thin; }
+  nav.top2 { display: none; }
+  .sideclose { display: none; }
+  .kbd { display: block; }
+  .wrap { margin: 0; }
+}
+@media (max-width: 1019px) {
+  .wrap { max-width: 820px; margin: 0 auto; }
+  aside.side { position: fixed; z-index: 40; top: 0; bottom: 0; left: 0; width: min(88vw, 330px); background: var(--surface); border-right: 1px solid var(--line); overflow-y: auto; transform: translateX(-102%); visibility: hidden; transition: transform .2s, visibility 0s .2s; padding: calc(1rem + env(safe-area-inset-top, 0px)) 1rem calc(1rem + env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px)); }
+  aside.side.open { transform: none; visibility: visible; transition: transform .2s; }
+  .scrim { position: fixed; inset: 0; z-index: 35; background: rgba(0, 0, 0, .5); }
+}
+@media (prefers-reduced-motion: reduce) { aside.side, aside.side.open { transition: none; } }
+footer { margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--line); color: var(--muted); font-size: .86rem; }
+</style>
+
+<div class="shell">
+<aside class="side" id="side" aria-label="Daftar isi dan pencarian">
+  <div class="side-in">
+    <div class="side-top"><span class="brand">Peta Jalan Menuju Doktor</span><button type="button" class="sideclose" id="sideclose">Tutup</button></div>
+    <div class="theme" role="group" aria-label="Tema tampilan">
+      <button type="button" data-t="auto" aria-pressed="true">Otomatis</button>
+      <button type="button" data-t="light" aria-pressed="false">Terang</button>
+      <button type="button" data-t="dark" aria-pressed="false">Gelap</button>
+    </div>
+    <div class="searchbox">
+      <label class="sr" for="q">Cari di halaman ini</label>
+      <input id="q" type="search" placeholder="Cari minggu, istilah, kode" autocomplete="off" spellcheck="false">
+      <span class="kbd" aria-hidden="true">/</span>
+    </div>
+    <div id="results" hidden><p class="resmeta" id="rescount" aria-live="polite"></p><ul class="reslist" id="reslist"></ul></div>
+    <nav id="toc" aria-label="Daftar isi"><p class="toc-h">Daftar isi</p></nav>
+  </div>
+</aside>
+<div class="scrim" id="scrim" hidden></div>
+<div class="wrap">
+<header class="top">
+  <div class="kicker">Dari ESP32 nol sampai disertasi</div>
+  <h1>Peta Jalan Menuju Doktor</h1>
+  <p class="lead">Panduan belajar riset TinyML dan LPWAN: 26 minggu pertama dirinci per minggu (materi, latihan, uji diri, hasil), lalu persiapan pendaftaran per bulan dan program doktor 4 tahun per kuartal.</p>
+  <div>
+    <div class="bar" role="img" aria-label="Skala waktu: 12 bulan persiapan dan 48 bulan program doktor, dibagi 7 tahap">
+      <i class="p" style="flex:3"></i><i class="p" style="flex:3"></i><i class="p" style="flex:6"></i>
+      <i style="flex:12"></i><i style="flex:12"></i><i style="flex:12"></i><i style="flex:12"></i>
+    </div>
+    <div class="scale-cap"><span>Persiapan · 12 bln</span><span>Program doktor · 4 tahun</span></div>
+  </div>
+</header>
+
+<nav class="top2" aria-label="Navigasi">
+  <ul>
+    <li><button type="button" class="menubtn" id="menubtn" aria-controls="side" aria-expanded="false">Menu dan cari</button></li>
+    <li><a href="#cara">Cara belajar</a></li>
+    <li><a href="#tahap">Tahap 0-6</a></li>
+    <li><a href="#modul">Modul Python dan ML</a></li>
+    <li><a href="#istilah">Istilah</a></li>
+    <li><a href="#kebiasaan">Kebiasaan</a></li>
+  </ul>
+</nav>
+
+<main>
+<section class="blk" id="cara">
+  <h2 class="h">Cara belajar tiap minggu</h2>
+  <p>Satu minggu sekitar 15-18 jam. Ikuti lima langkah ini setiap minggu supaya teori dan praktik selalu berpasangan.</p>
+  <ol class="steps">
+    <li><span><b>Baca atau tonton materi minggu itu.</b> Cukup sampai bisa mengerjakan latihan; tidak perlu tuntas.</span><span class="t">3-4 jam</span></li>
+    <li><span><b>Hitung dan catat dengan tangan.</b> Tulis rumus atau alurnya dengan kata sendiri.</span><span class="t">1 jam</span></li>
+    <li><span><b>Kerjakan latihan praktik.</b> Di simulator atau di papan.</span><span class="t">6-8 jam</span></li>
+    <li><span><b>Uji diri.</b> Jawab pertanyaan tanpa melihat catatan; yang gagal dijawab diulang minggu depan.</span><span class="t">30 menit</span></li>
+    <li><span><b>Catat hasil dan simpan di Git.</b> Satu paragraf: apa yang berhasil, apa yang gagal, apa yang diubah.</span><span class="t">1 jam</span></li>
+  </ol>
+  <div class="stuck"><b>Jika macet</b><p>Coba sendiri 20 menit. Salin pesan error ke pencarian. Jika masih buntu, tanya di forum dengan contoh kode terkecil yang masih menimbulkan masalah. Jika tetap macet, tandai dan lanjut ke langkah lain, lalu kembali di akhir minggu.</p></div>
+</section>
+
+<section class="blk" id="tahap">
+  <h2 class="h">Tahap 0 sampai 6</h2>
+  <p class="note">Centang tiap langkah yang selesai. Centang tersimpan di peramban ini saja. Papan ESP32 belum wajib sampai minggu 5; minggu 1-4 bisa memakai simulator Wokwi. Tiap minggu, bulan, dan kuartal memuat baris Teori (apa yang wajib dikuasai) dan Praktikum (langkah yang menerapkan teori itu, dengan hal yang dicatat).</p>
+  <div class="tools">
+    <button type="button" id="open-all">Buka semua</button>
+    <button type="button" id="close-all">Tutup semua</button>
+    <span class="sum" id="sum" aria-live="polite"></span>
+  </div>
+  <div id="stages"></div>
+  <div class="prog-box">
+    <strong id="progtxt">0 dari 0 langkah selesai</strong>
+    <div class="prog" role="progressbar" aria-label="Kemajuan keseluruhan" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="prog"><div id="progbar"></div></div>
+  </div>
+</section>
+
+<section class="blk" id="modul">
+  <h2 class="h">Modul Python dan ML untuk data sensor</h2>
+  <p>Sepuluh pelajaran berurutan yang menjelaskan minggu 13-18 secara rinci: Python, NumPy, pandas, matplotlib, machine learning klasik, jaringan saraf, sampai model int8 yang siap dipindah ke ESP32. Semuanya memakai satu data latihan yang sama, jadi hasil tiap pelajaran menjadi masukan pelajaran berikutnya.</p>
+  <div class="warn"><b>Status pengujian</b><p>Kode pelajaran 0-7 sudah saya jalankan (Python 3.13, NumPy 2.5, pandas 3.0, matplotlib 3.11, scikit-learn 1.9) dan blok "Hasil yang seharusnya" berasal dari run itu. Pelajaran 8-9 memakai TensorFlow yang tidak bisa saya pasang di lingkungan saya, jadi kodenya belum dijalankan; hanya hitungan jumlah parameter yang saya periksa. Jika versi pustaka Anda berbeda, tampilan angka bisa sedikit berbeda.</p></div>
+  <h3 style="font-family:var(--f-display);font-size:1.05rem;margin:1.5rem 0 .2rem">Alur yang dibangun</h3>
+  <ol class="flow" aria-label="Alur dari data sampai ESP32">
+    <li>Data sensor</li><li>Jendela 1 detik</li><li>Fitur atau normalisasi</li><li>Model</li><li>Kuantisasi int8</li><li>Array C</li><li>ESP32</li>
+  </ol>
+  <div class="setup">
+    <div><b>Paling mudah: Google Colab</b>Buka colab.research.google.com, buat notebook, dan tiap kode di bawah ditempel di satu sel. Pustaka dasar dan TensorFlow sudah tersedia. Berkas hasil (<code>sensor.csv</code>, <code>jendela.npz</code>) tersimpan selama sesi; unduh bila perlu.</div>
+    <div><b>Di laptop</b>Pasang Python 3.10 atau lebih baru, lalu <code>python -m venv env</code>, aktifkan, dan <code>pip install numpy pandas matplotlib scikit-learn</code>. TensorFlow (<code>pip install tensorflow</code>) baru perlu di pelajaran 8.</div>
+    <div><b>Aturan kerja</b>Simpan tiap kode dengan nama berkas yang tertera, jalankan berurutan di folder yang sama, dan commit ke Git setelah tiap pelajaran.</div>
+  </div>
+  <div class="mods" id="modlist"></div>
+  <div class="lat">
+    <h3 style="font-family:var(--f-display);font-size:1.05rem;margin:1.75rem 0 0">Latihan lanjutan setelah pelajaran 9</h3>
+    <ul>
+      <li>Ganti <code>sensor.csv</code> dengan data akselerometer nyata dari minggu 3-4 (kolom <code>sesi</code>, <code>t</code>, <code>ax</code>, <code>ay</code>, <code>az</code>, <code>label</code>) dan jalankan ulang pelajaran 5-9 tanpa mengubah kode.</li>
+      <li>Tambah kelas ketiga (misalnya berjalan) dan catat apa yang berubah pada F1 dan matriks konfusi.</li>
+      <li>Buat tabel perbandingan pohon keputusan, jaringan NumPy, dan CNN: F1, jumlah parameter, ukuran, dan (nanti di papan) latensi serta energi per inferensi.</li>
+      <li>Pindahkan model int8 ke ESP32 dengan TensorFlow Lite Micro di minggu 17, lalu ukur energinya di minggu 18.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="blk" id="istilah">
+  <h2 class="h">Istilah yang akan sering muncul</h2>
+  <p class="note">Baca sekali di awal, kembali ke sini bila bertemu istilah asing.</p>
+  <dl class="gl" id="gl"></dl>
+</section>
+
+<section class="blk" id="kebiasaan">
+  <h2 class="h">Kebiasaan yang berjalan di semua tahap</h2>
+  <div class="hab">
+    <div><b>Catatan mingguan</b>Satu halaman: apa yang dikerjakan, apa yang gagal, prioritas minggu depan.</div>
+    <div><b>Versi dan reproduksi</b>Semua kode di Git; catat seed, versi pustaka, dan tanggal pengukuran.</div>
+    <div><b>Membaca terus-menerus</b>2-3 makalah per minggu, dicatat di matriks literatur.</div>
+    <div><b>Konsultasi berkala</b>Ringkasan ke pembimbing atau mentor tiap satu atau dua minggu.</div>
+    <div><b>Komunitas</b>tinyML Foundation, The Things Network, arXiv cs.NI dan cs.LG.</div>
+    <div><b>Ritme sehat</b>Pakai minggu cadangan; turunkan target bila dua minggu berturut-turut di bawah 10 jam.</div>
+  </div>
+</section>
+</main>
+
+<footer>Disusun 3 November 2026 dengan asumsi program doktor 4 tahun. Lama studi, syarat publikasi, dan jadwal pendaftaran mengikuti ketentuan kampus yang Anda pilih. Nama kursus, buku, dan perangkat ditulis dari ingatan; cek versi dan ketersediaan terbaru.</footer>
+</div>
+</div>
+
+<script>
+(function () {
+  function store(k, v) { try { if (v === undefined) return localStorage.getItem(k); localStorage.setItem(k, v); } catch (e) { return null; } }
+  function esc(s) { var d = document.createElement("div"); d.textContent = s; return d.innerHTML; }
+
+  /* minggu: [no, judul, pelajari, kerjakan, uji diri, hasil] */
+  var W0 = [
+    [1, "Kenalan dengan mikrokontroler",
+      "Beda mikrokontroler dan komputer biasa; ESP32 punya prosesor, memori, dan pin; tegangan kerja 3,3 V; cara program diunggah. Pasang Arduino IDE (atau PlatformIO) beserta dukungan board ESP32, atau buka Wokwi di peramban. Tutorial ESP32 dari Random Nerd Tutorials dan dokumentasi Espressif cocok sebagai pendamping.",
+      "LED berkedip (blink) di satu pin GPIO; ubah kecepatan kedip; cetak teks ke Serial Monitor tiap detik.",
+      "Mengapa LED perlu resistor? Apa fungsi setup() dan loop()? Berapa tegangan kerja pin ESP32?",
+      "Program blink dan serial berjalan; tangkapan layar masuk catatan."],
+    [2, "Dasar C/C++ dan input-output",
+      "Variabel dan tipe data (int, float, bool), if/else, for/while, fungsi; digitalRead dan digitalWrite; konsep PWM.",
+      "Tombol menyalakan LED; atur kecerahan LED dengan PWM naik-turun halus; buat fungsi kedip(n).",
+      "Beda pull-up dan pull-down? Mengapa pembacaan tombol perlu debouncing?",
+      "Dua program kecil tersimpan di Git."],
+    [3, "Sensor lewat I2C dan pin analog",
+      "ADC dan resolusi 12-bit; protokol I2C (SDA, SCL, alamat perangkat); cara membaca datasheet sensor singkat.",
+      "Baca sensor suhu/kelembapan (mis. BME280 atau DHT22) atau akselerometer (mis. MPU6050); cetak nilai tiap 2 detik; baca satu pin analog.",
+      "Apa itu alamat I2C dan bagaimana mencarinya dengan I2C scanner? Apa arti resolusi 12-bit?",
+      "Log 5 menit data sensor disimpan sebagai CSV."],
+    [4, "Timer, interupsi, dan multitugas",
+      "millis() dibanding delay(); interupsi eksternal; konsep task di FreeRTOS (ESP32 menjalankannya).",
+      "Ganti delay() dengan millis(); ambil sampel sensor 10 kali per detik dengan timer; buat dua task terpisah (baca sensor, cetak).",
+      "Mengapa delay() buruk untuk program hemat daya? Mengapa variabel yang dipakai interupsi harus volatile?",
+      "Pengambil data berkala yang stabil selama 30 menit."],
+    [5, "Daya rendah dan pengukuran arus",
+      "Mode aktif, light sleep, deep sleep; wake-up lewat timer; anggaran energi (arus × waktu); kapasitas baterai dalam mAh.",
+      "Tidurkan ESP32 10 detik, bangun, cetak ke serial; ukur arus aktif dan tidur dengan INA219 atau multimeter yang dipasang seri; matikan WiFi dan Bluetooth; hitung umur baterai 2000 mAh secara teoretis.",
+      "Mengapa arus tidur papan DevKit lebih besar dari angka datasheet chip? Bagaimana menghitung arus rata-rata satu siklus?",
+      "Tabel arus aktif dan tidur, plus estimasi umur baterai."],
+    [6, "Modul LoRa: kirim dan terima paket",
+      "Gambaran LoRa (jangkauan jauh, laju data rendah); parameter SF, BW, CR, daya pancar; SPI; wiring modul SX127x atau SX126x ke ESP32; pustaka RadioLib.",
+      "Pasang antena sebelum modul menyala dan jangan memancar tanpa antena; satu ESP32 mengirim \"ping + nomor urut\" tiap 10 detik, yang lain menerima dan mencetak RSSI/SNR; pastikan frekuensi modul sesuai regulasi Indonesia.",
+      "Apa pengaruh SF yang lebih tinggi terhadap jangkauan dan waktu kirim? Mengapa frekuensi modul harus sesuai wilayah?",
+      "Log paket dan persentase paket diterima pada tiga jarak."],
+    [7, "Pengantar TinyML: model pertama",
+      "Apa itu TinyML; alur data → latih → konversi → deploy; batas RAM dan flash; apa itu klasifikasi. Kursus Fundamentals of TinyML (Harvard di edX) dan buku TinyML karya Warden dan Situnayake bisa jadi pendamping.",
+      "Di Edge Impulse buat proyek, kumpulkan data akselerometer (ponsel atau sensor), latih model klasifikasi gerakan sederhana (mis. diam vs goyang), lihat perkiraan RAM dan flash.",
+      "Mengapa data latih dan uji harus terpisah? Apa arti akurasi 90% bila 90% data berasal dari satu kelas?",
+      "Proyek Edge Impulse dengan akurasi dan ukuran model tercatat."],
+    [8, "Model di ESP32 dan siklus lengkap pertama",
+      "Ekspor model sebagai pustaka Arduino; waktu inferensi; cara mengukur energi satu siklus.",
+      "Jalankan model di ESP32 dan ukur latensi inferensi; buat siklus bangun → baca sensor → inferensi → kirim hasil lewat LoRa → deep sleep; ukur arus tiap fase.",
+      "Berapa energi satu siklus (mJ) dan fase mana yang paling boros?",
+      "Prototipe pertama dan tabel energi per fase."],
+    [9, "Teori LoRa dan airtime",
+      "Chirp spread spectrum (gambaran), sensitivitas dan link budget, rumus airtime (Tsym, jumlah simbol payload), duty cycle. Kalkulator di halaman Jalur Belajar TinyML LPWAN bisa dipakai untuk memeriksa hasil.",
+      "Tulis skrip Python untuk airtime; bandingkan dengan kalkulator; buat grafik airtime terhadap SF untuk payload 10, 20, dan 50 byte.",
+      "Mengapa SF12 jauh lebih lama dari SF7? (Untuk payload 10 byte pada 125 kHz, sekitar 24 kali lebih lama.) Apa yang membatasi jumlah pesan per jam?",
+      "Skrip dan grafik dengan galat di bawah 5% dari kalkulator."],
+    [10, "LoRaWAN: arsitektur dan ADR",
+      "Node, gateway, network server; kelas A/B/C; join OTAA dan ABP; ADR; regional parameters (AS923). Dokumentasi LoRaWAN di The Things Network cukup untuk pengantar.",
+      "Gambar diagram alur join dan ADR dengan kata sendiri; buat akun The Things Network; baca satu bab dokumentasi.",
+      "Mengapa kelas A paling hemat daya? Apa yang dilakukan ADR dan kapan ia gagal?",
+      "Diagram dan catatan 1-2 halaman."],
+    [11, "Skalabilitas dan model energi",
+      "Pure ALOHA dan tabrakan paket, kapasitas jaringan; model energi (arus TX, RX, sleep × waktu).",
+      "Hitung peluang tabrakan untuk 10, 100, dan 1000 node di notebook; bangun model umur baterai dari siklus minggu 8; bandingkan dengan pengukuran.",
+      "Mengapa PDR turun saat jumlah node bertambah? Dari mana selisih antara model dan pengukuran?",
+      "Notebook dan grafik model vs pengukuran."],
+    [12, "Evaluasi tahap 0",
+      "Ulang catatan dan tutup celah yang masih lemah.",
+      "Rapikan repositori (README, foto rangkaian, kode); presentasikan 10-15 menit ke teman atau calon pembimbing.",
+      "Bisakah Anda menjelaskan seluruh siklus sensor → LoRa → baterai tanpa melihat catatan?",
+      "Repositori rapi dan satu presentasi."]
+  ];
+  var W1 = [
+    [13, "Python dan data sensor",
+      "NumPy, pandas, matplotlib; konsep windowing pada data deret waktu.",
+      "Muat CSV dari minggu 3, bersihkan, plot, hitung statistik per jendela waktu.",
+      "Mengapa data sensor dipotong dalam jendela? Apa yang terjadi bila jendela terlalu panjang untuk MCU?",
+      "Notebook pengolahan data."],
+    [14, "Dasar machine learning",
+      "Regresi, klasifikasi, overfitting, pembagian latih/validasi/uji, F1. Pilih satu: kursus Machine Learning (Andrew Ng, Coursera) atau buku Hands-On Machine Learning (Géron).",
+      "Klasifikasi dengan scikit-learn pada data sensor Anda atau dataset publik; bandingkan dua algoritma.",
+      "Apa tanda model overfitting? Kapan F1 lebih berguna dari akurasi?",
+      "Notebook dengan F1 dan matriks konfusi."],
+    [15, "Jaringan saraf untuk data sensor",
+      "Neuron, lapisan, fungsi aktivasi, pelatihan; CNN 1D. Video neural networks 3Blue1Brown dan kursus fast.ai membantu intuisi.",
+      "Latih CNN 1D kecil di Keras atau PyTorch untuk klasifikasi gerakan; catat jumlah parameter.",
+      "Mengapa CNN 1D cocok untuk akselerometer? Berapa parameter yang masih muat di MCU Anda?",
+      "Model terlatih dan jumlah parameternya."],
+    [16, "Kuantisasi dan kompresi",
+      "Post-training quantization dan quantization-aware training; pruning dan distilasi pengetahuan (gambaran).",
+      "Ubah model float32 menjadi int8; bandingkan akurasi, ukuran, dan waktu inferensi.",
+      "Mengapa akurasi bisa turun setelah kuantisasi? Kapan QAT lebih baik dari PTQ?",
+      "Tabel float32 vs int8."],
+    [17, "TensorFlow Lite Micro di ESP32",
+      "Konversi ke .tflite lalu ke array C; tensor arena; operator yang didukung.",
+      "Jalankan model Anda di ESP32 dengan TensorFlow Lite Micro; ukur RAM, flash, dan latensi.",
+      "Apa itu tensor arena dan bagaimana menentukan ukurannya?",
+      "Model berjalan di papan dengan angka sumber daya."],
+    [18, "Energi per inferensi",
+      "Cara memisahkan energi inferensi dari fase lain; hubungan ukuran model dan energi.",
+      "Ukur energi tiap inferensi untuk dua atau tiga ukuran model; buat grafik energi terhadap akurasi.",
+      "Model mana yang memberi akurasi cukup dengan energi terkecil?",
+      "Grafik energi vs akurasi."],
+    [19, "Membaca makalah ilmiah",
+      "Metode tiga lintasan (Keshav, \"How to Read a Paper\"); memakai Zotero; pola survei, metode, dan evaluasi.",
+      "Baca satu survei LPWAN, satu survei TinyML, dan satu makalah ADR; isi matriks literatur (referensi, masalah, metode, metrik, baseline, batasan).",
+      "Apa klaim utama tiap makalah dan apa yang tidak mereka uji?",
+      "Matriks 6 makalah."],
+    [20, "Simulator jaringan",
+      "Gambaran ns-3 atau FLoRa di OMNeT++; struktur skenario; membaca log.",
+      "Pasang satu simulator; jalankan skenario contoh 100 node; ubah jumlah node dan lihat PDR.",
+      "Apa parameter utama skenario (node, area, interval kirim, SF)?",
+      "Skenario berjalan dan log tersimpan."],
+    [21, "Replikasi ADR (1)",
+      "Cara kerja ADR standar; metrik PDR, energi, dan fairness.",
+      "Pilih satu makalah evaluasi ADR; tiru skenarionya di simulator.",
+      "Parameter mana dari makalah yang belum jelas dan bagaimana Anda mengisinya?",
+      "Skenario replikasi berjalan."],
+    [22, "Replikasi ADR (2)",
+      "Cara membandingkan hasil dengan makalah; sumber selisih hasil.",
+      "Jalankan beberapa ulangan; bandingkan grafik Anda dengan grafik makalah; tulis hipotesis penyebab selisih.",
+      "Selisih Anda berasal dari model kanal, parameter, atau jumlah ulangan?",
+      "Grafik replikasi dan catatan selisih."],
+    [23, "Dasar reinforcement learning",
+      "Multi-armed bandit, eksplorasi vs eksploitasi, Q-learning. Sutton dan Barto bab 1-3 sebagai pendamping.",
+      "Implementasikan bandit sederhana untuk memilih SF pada simulator Python kecil; plot regret.",
+      "Mengapa eksplorasi diperlukan dan apa harganya bagi baterai?",
+      "Notebook bandit dan kurva regret."],
+    [24, "Literatur terarah",
+      "Edge inference di LPWAN, kompresi payload, ADR berbasis pembelajaran.",
+      "Baca 10 makalah tambahan; kelompokkan dalam matriks menurut metode dan batasan.",
+      "Pola apa yang berulang dan apa yang jarang dibahas?",
+      "Matriks 20 makalah."],
+    [25, "Merumuskan celah riset",
+      "Cara menulis pernyataan celah: apa yang sudah ada, apa yang belum, mengapa penting.",
+      "Tulis 2-3 kandidat celah masing-masing satu paragraf; diskusikan dengan teman atau calon pembimbing; pilih satu.",
+      "Dapatkah celah itu diuji dengan perangkat dan waktu yang Anda punya?",
+      "Satu kalimat celah riset dan satu paragraf alasannya."],
+    [26, "Portofolio dan demo",
+      "Cara menyajikan karya teknis ke calon pembimbing.",
+      "Rapikan repositori publik, tulis README yang jelas, buat demo 3 menit (video atau gambar), tulis ringkasan satu halaman; isi ulang skor kompetensi.",
+      "Dapatkah orang lain menjalankan proyek Anda dari README saja?",
+      "Repositori publik, demo, dan ringkasan satu halaman."]
+  ];
+
+  /* bulan/kuartal: [label, judul, fokus, kerjakan, hasil] */
+  var M2 = [
+    ["Bulan 7", "Pilih topik dan kerangka proposal", "Menentukan arah riset yang konkret.", "Tulis kerangka proposal (latar belakang, masalah, tujuan, metode, linimasa); tambah 10 makalah ke matriks.", "Kerangka proposal satu halaman."],
+    ["Bulan 8", "Petakan kampus dan calon pembimbing", "Mencari lab yang aktif di IoT, LPWAN, atau TinyML.", "Daftar 5-8 lab; baca beberapa makalah terbaru mereka; kirim email singkat berisi perkenalan, minat riset satu paragraf, tautan repositori, dan kerangka proposal.", "Daftar lab dan email terkirim."],
+    ["Bulan 9", "Tulis proposal 5-8 halaman", "Menyatukan celah, metode, dan rencana kerja.", "Tulis draf lengkap; minta umpan balik dari dua orang; revisi.", "Proposal versi 1."],
+    ["Bulan 10", "Bahasa dan dokumen pendukung", "Memenuhi syarat administratif.", "Jadwalkan dan latih tes bahasa Inggris sesuai syarat kampus; siapkan ijazah, transkrip, CV akademik; minta 2-3 surat rekomendasi.", "Skor tes atau jadwal tes dan berkas lengkap."],
+    ["Bulan 11", "Beasiswa dan formulir pendaftaran", "Memastikan syarat dan tenggat resmi.", "Cek persyaratan beasiswa (mis. LPDP) dan kampus dari situs resmi; isi formulir; revisi proposal berdasarkan masukan.", "Formulir terisi dan proposal versi akhir."],
+    ["Bulan 12", "Kirim berkas dan siapkan wawancara", "Menyelesaikan pendaftaran tanpa berhenti berlatih.", "Kirim berkas; latih menjelaskan proposal dalam 5 menit; lanjutkan praktik kecil agar keterampilan tetap hangat.", "Berkas terkirim dan satu latihan wawancara."]
+  ];
+  var Y1 = [
+    ["Kuartal 1", "Kuliah dan penetapan pertanyaan riset", "Menyesuaikan diri dan mengunci arah.", "Ikuti mata kuliah wajib; finalisasi pertanyaan penelitian bersama pembimbing; atur repositori dan alur kerja.", "Pertanyaan penelitian tertulis."],
+    ["Kuartal 2", "Replikasi dan baseline", "Menguasai pembanding yang akan dikalahkan.", "Replikasi ADR standar dan satu metode ADR cerdas; kumpulkan baseline energi dan PDR.", "Grafik baseline yang bisa direproduksi."],
+    ["Kuartal 3", "Prototipe dan tinjauan pustaka sistematis", "Membangun fondasi eksperimen dan bab 2.", "Prototipe sensor-inferensi-LoRa dengan energi terukur; tinjauan pustaka sistematis (PRISMA) hingga 60 makalah.", "Prototipe dan matriks 60 makalah."],
+    ["Kuartal 4", "Ujian kualifikasi", "Mempertahankan proposal.", "Tulis proposal kualifikasi; latihan ujian; susun draf makalah survei atau konferensi.", "Proposal kualifikasi dan draf makalah."]
+  ];
+  var Y2 = [
+    ["Kuartal 1", "Desain metode", "Menetapkan metode inti.", "Rancang model ringan (ADR adaptif atau reduksi data); tentukan metrik dan eksperimen pembanding.", "Dokumen desain metode."],
+    ["Kuartal 2", "Implementasi dan simulasi", "Mengimplementasikan metode di simulator dan firmware.", "Optimasi model (kuantisasi, pruning, distilasi); simulasi hingga 1.000+ node; sensitivitas parameter.", "Hasil simulasi awal."],
+    ["Kuartal 3", "Eksperimen perangkat nyata", "Memvalidasi di papan.", "Eksperimen terkontrol vs baseline pada perangkat nyata, minimal 5 ulangan, interval kepercayaan.", "Tabel hasil dan analisis."],
+    ["Kuartal 4", "Makalah konferensi", "Menerbitkan hasil awal.", "Tulis dan kirim 1-2 makalah konferensi (mis. WF-IoT, EWSN, tinyML Research Symposium).", "Makalah terkirim atau terbit."]
+  ];
+  var Y3 = [
+    ["Kuartal 1", "Rancang dan pasang testbed lapangan", "Menyiapkan skenario aplikasi nyata.", "Pilih lokasi dan skenario (mis. lingkungan, pertanian, pesisir); pasang gateway dan node; uji kestabilan.", "Testbed berjalan."],
+    ["Kuartal 2", "Pengumpulan data lapangan", "Mengumpulkan data jangka panjang.", "Jalankan eksperimen berminggu-minggu; catat PDR, RSSI/SNR, tegangan baterai, dan kejadian anomali.", "Dataset lapangan mentah."],
+    ["Kuartal 3", "Analisis dan optimasi", "Membandingkan simulasi dan lapangan.", "Analisis selisih; kalibrasi model; optimasi akhir metode.", "Analisis simulasi vs lapangan."],
+    ["Kuartal 4", "Makalah jurnal", "Menerbitkan hasil utama.", "Tulis dan kirim 1-2 makalah jurnal (mis. IEEE Internet of Things Journal, ACM TOSN, Computer Networks, Sensors); tangani komentar reviewer.", "Makalah jurnal terkirim atau terbit."]
+  ];
+  var Y4 = [
+    ["Kuartal 1", "Tulis disertasi bagian awal", "Menyusun bab pendahuluan, tinjauan pustaka, metodologi.", "Susun bab dari makalah dan catatan; sepakati kerangka dengan pembimbing.", "Draf bab 1-3."],
+    ["Kuartal 2", "Bab hasil dan eksperimen tambahan", "Menutup celah eksperimen.", "Tulis bab hasil dan diskusi; jalankan eksperimen tambahan yang diminta pembimbing.", "Draf bab hasil."],
+    ["Kuartal 3", "Revisi dan rilis", "Menyempurnakan disertasi dan merilis karya.", "Revisi menyeluruh; rilis kode dan dataset; latihan presentasi.", "Disertasi lengkap dan repositori terbuka."],
+    ["Kuartal 4", "Ujian akhir", "Mempertahankan disertasi.", "Ajukan ujian sesuai prosedur kampus; latihan tanya-jawab; perbaikan pasca ujian.", "Ujian selesai."]
+  ];
+
+  var STAGES = [
+    { id: "t0", node: "0", prep: true, open: true, when: "Bulan 1-3 · minggu 1-12", title: "Fondasi praktik: ESP32 dari nol sampai paket LoRa", unit: "Minggu", type: "w", items: W0,
+      sum: [["Teori inti", "C/C++ dasar, GPIO, I2C dan SPI, mode daya rendah, dasar LoRa (SF, BW, airtime, duty cycle)."], ["Praktik", "Rencana ESP32 bertahap: LED, sensor, timer, deep sleep, modul LoRa, model pertama."], ["Luaran", "Dua ESP32 bertukar paket LoRa, catatan arus tidur, repositori Git pertama."]],
+      gate: "Paket LoRa diterima dan airtime hitungan manual cocok dengan pengukuran." },
+    { id: "t1", node: "1", prep: true, open: true, when: "Bulan 4-6 · minggu 13-26", title: "Portofolio TinyML dan literatur awal", unit: "Minggu", type: "w", items: W1,
+      sum: [["Teori inti", "Dasar machine learning, kuantisasi, ADR LoRaWAN, cara membaca makalah."], ["Praktik", "Model int8 di ESP32, simulator LoRaWAN, replikasi satu hasil makalah."], ["Luaran", "Matriks 20 makalah, satu model berjalan di papan, repositori publik dengan README."]],
+      gate: "Satu kalimat celah riset awal dan satu demo yang bisa ditunjukkan kepada calon pembimbing." },
+    { id: "t2", node: "2", prep: true, when: "Bulan 7-12", title: "Pendaftaran program doktor", unit: "Bulan", type: "m", items: M2,
+      sum: [["Catatan", "Syarat, tenggat, dan skor bahasa berbeda tiap kampus dan beasiswa. Cek halaman resmi jauh sebelum tenggat."]],
+      gate: "Diterima di program doktor dan memiliki pembimbing." },
+    { id: "t3", node: "3", d: true, when: "Tahun 1 · doktor", title: "Kuliah, tinjauan pustaka, dan kualifikasi", unit: "Kuartal", type: "m", items: Y1,
+      sum: [["Teori inti", "Mata kuliah wajib, tinjauan pustaka sistematis, metodologi dan statistik eksperimen."]],
+      gate: "Lulus ujian kualifikasi dan proposal disetujui pembimbing." },
+    { id: "t4", node: "4", d: true, when: "Tahun 2 · doktor", title: "Desain metode dan implementasi perangkat keras", unit: "Kuartal", type: "m", items: Y2,
+      sum: [["Teori inti", "Optimasi model untuk MCU, RL ringan untuk pemilihan parameter, model energi."]],
+      gate: "Hasil awal metode lebih baik dari baseline dan sudah dikirim atau terbit." },
+    { id: "t5", node: "5", d: true, when: "Tahun 3 · doktor", title: "Uji lapangan dan makalah jurnal", unit: "Kuartal", type: "m", items: Y3,
+      sum: [["Teori inti", "Analisis selisih simulasi vs lapangan, generalisasi hasil, menulis jurnal dan menanggapi reviewer."]],
+      gate: "Minimal satu makalah jurnal terkirim atau terbit, sesuai syarat kelulusan universitas." },
+    { id: "t6", node: "6", d: true, when: "Tahun 4 · doktor", title: "Disertasi dan ujian akhir", unit: "Kuartal", type: "m", items: Y4,
+      sum: [["Catatan", "Syarat publikasi dan prosedur ujian mengikuti ketentuan kampus."]],
+      gate: "Lulus ujian disertasi dan resmi bergelar doktor." }
+  ];
+
+  /* teori yang wajib dikuasai (t) dan langkah praktikum (p), per minggu, bulan, atau kuartal */
+  var TP = {
+    t0i0: { t: ["Mikrokontroler vs komputer: prosesor, flash (tempat program), RAM (tempat variabel), dan periferal (GPIO, ADC, UART) ada dalam satu chip", "Level logika: pin ESP32 bekerja di 3,3 V; 5 V bisa merusaknya", "Hukum Ohm (V = I × R) untuk menghitung resistor LED", "Serial dan baud rate: dua pihak harus sepakat soal kecepatan (misalnya 115200)"],
+      p: ["Pasang dukungan board ESP32 di Arduino IDE (Boards Manager, paket dari Espressif) atau buka proyek ESP32 di Wokwi", "Hitung resistor LED: R = (3,3 − Vf) / I. Untuk LED merah (Vf kira-kira 2 V) dan arus 5 mA, R = 260 Ω, jadi pakai 330 Ω yang umum di pasaran", "Unggah program blink 1 Hz, lalu ubah menjadi 5 Hz dan catat apa yang berubah", "Aktifkan Serial 115200 baud dan cetak millis() tiap detik; ganti baud Serial Monitor ke 9600 dan amati teks yang rusak", "Catat ukuran sketch (flash) dan memori variabel (RAM) yang dilaporkan IDE sebagai angka awal"] },
+    t0i1: { t: ["Logika digital HIGH/LOW, pull-up dan pull-down: pin yang tidak tersambung 'mengambang' dan membaca acak", "Debouncing: kontak tombol memantul beberapa milidetik sehingga satu tekanan terbaca berkali-kali", "PWM: duty cycle (persen waktu HIGH) mengatur daya rata-rata", "Tipe data C/C++ dan ukurannya (int, float, bool) serta alur kendali (if, for)"],
+      p: ["Sambungkan tombol ke pin dengan INPUT_PULLUP dan baca: nilai LOW berarti ditekan", "Tekan tombol 20 kali dan hitung berapa tekanan yang terdeteksi tanpa debouncing, lalu ulangi dengan jeda 20-50 ms; catat selisihnya", "Atur kecerahan LED dengan PWM (analogWrite atau fungsi ledc, sesuai versi core ESP32 Anda) dari 0 sampai 100% lalu turun lagi", "Tulis fungsi kedip(n) yang mengedipkan LED n kali dan panggil dari loop()", "Commit kedua program ke Git dengan pesan yang jelas"] },
+    t0i2: { t: ["ADC 12-bit memberi 4096 tingkat; tegangan = nilai / 4095 × 3,3 V. ADC ESP32 tidak linear di ujung rentang, jadi jangan percaya penuh nilai dekat 0 dan 4095", "I2C: dua jalur (SDA dan SCL), tiap perangkat punya alamat 7-bit, perlu resistor pull-up", "Laju sampel dan satuan: nyatakan data dalam satuan fisik (°C, g), bukan angka mentah", "Membaca datasheet: alamat I2C, rentang ukur, resolusi, arus kerja"],
+      p: ["Jalankan I2C scanner dan catat alamat yang muncul (sebagai pembanding, BME280 biasanya 0x76 atau 0x77 dan MPU6050 biasanya 0x68)", "Pasang pustaka sensor dan cetak nilai tiap 2 detik", "Sambungkan potensiometer ke pin analog, putar penuh, dan konversi bacaan ke volt dengan rumus di atas; bandingkan dengan multimeter", "Rekam 5 menit data dan simpan sebagai CSV dengan header (sesi, t, kolom sensor, label)", "Bandingkan bacaan suhu dengan termometer lain dan catat selisihnya"] },
+    t0i3: { t: ["Teorema Nyquist: laju sampel minimal dua kali frekuensi tertinggi sinyal. Goyangan 4 Hz butuh sedikitnya 8 Hz; 50 Hz sudah leluasa", "Timer dan interupsi: ISR harus singkat; variabel yang dipakai bersama ISR dan program utama dideklarasikan volatile", "delay() memblokir CPU, millis() tidak; hanya cara kedua yang cocok untuk multitugas dan hemat daya", "FreeRTOS: task, prioritas, dan queue sebagai penghubung antar task"],
+      p: ["Ambil sampel 50 Hz dengan timer atau millis()", "Ukur jitter: catat selisih waktu antar sampel sebanyak 1000 kali dan hitung minimum, maksimum, dan rata-ratanya; ulangi dengan delay() lalu bandingkan", "Buat dua task: satu membaca sensor dan memasukkan ke queue, satu mengambil dari queue dan mencetak", "Jalankan 30 menit dan hitung sampel yang hilang (seharusnya 50 × 1800 = 90.000 sampel)", "Tulis kesimpulan: metode mana yang paling stabil dan mengapa"] },
+    t0i4: { t: ["Energi E = V × I × t; arus rata-rata satu siklus = (Σ I_i × t_i) / T", "Umur baterai ideal = kapasitas (mAh) / arus rata-rata (mA); nilai nyata lebih rendah karena swa-pengosongan, suhu, dan derating", "Mode aktif, light sleep, dan deep sleep: apa yang tetap hidup dan apa yang hilang (RAM biasa hilang saat deep sleep kecuali RTC memory)", "Arus tidur papan DevKit lebih besar dari angka chip karena konverter USB-serial, regulator, dan LED di papan"],
+      p: ["Ukur arus aktif (INA219 atau multimeter mode mA yang dipasang seri dengan suplai) dan catat", "Tidurkan ESP32 10 detik, bangunkan, cetak ke serial, dan ukur arus saat tidur", "Matikan WiFi dan Bluetooth dan ukur lagi untuk melihat selisihnya", "Hitung arus rata-rata untuk siklus aktif 2 detik per 60 detik memakai angka Anda. Contoh (angka contoh, bukan hasil ukur): aktif 80 mA × 2 s dan tidur 0,01 mA × 58 s memberi rata-rata sekitar 2,68 mA", "Dari contoh itu baterai 2000 mAh bertahan sekitar 747 jam (sekitar 31 hari); ganti dengan angka ukur Anda", "Tulis penyebab selisih antara angka datasheet dan hasil ukur"] },
+    t0i5: { t: ["Modulasi chirp spread spectrum: SF tinggi berarti lebih sensitif dan jangkauan jauh, tetapi paket jauh lebih lama di udara", "Link budget = daya pancar + penguatan antena − rugi lintasan − sensitivitas penerima; hasilnya margin sinyal", "SPI: MOSI, MISO, SCK, dan CS; pin radio harus sesuai papan Anda", "Duty cycle dan batas daya pancar mengikuti regulasi setempat"],
+      p: ["Pasang antena sebelum memberi daya pada modul, lalu sambungkan SPI dan pin kontrol (NSS, DIO, RESET) sesuai skema modul Anda", "Pasang RadioLib, set frekuensi sesuai regulasi Indonesia untuk modul Anda, dan uji pengirim-penerima dasar", "Kirim 'ping n' tiap 10 detik; di penerima cetak nomor, RSSI, dan SNR", "Uji tiga jarak (misalnya 5, 20, dan 50 m) × dua pengaturan SF (7 dan 10), masing-masing 20 paket", "Hitung PDR dan rata-rata RSSI tiap kombinasi dan buat tabel", "Bandingkan tren dengan teori: SF10 seharusnya lebih tahan di jarak jauh tetapi lebih lama di udara"] },
+    t0i6: { t: ["Alur ML: data → fitur → model → evaluasi → deploy", "Pembagian latih, validasi, dan uji; data uji disentuh sekali di akhir", "Akurasi vs matriks konfusi: akurasi menipu bila kelas tidak seimbang", "Windowing: satu jendela waktu menjadi satu contoh data", "Batas sumber daya MCU: RAM dan flash membatasi ukuran model"],
+      p: ["Buat proyek di Edge Impulse dan sambungkan sensor atau unggah CSV", "Rekam beberapa sesi terpisah per kelas (misalnya diam dan goyang), bukan satu rekaman panjang", "Pilih jendela 1 detik dengan langkah 0,5 detik", "Pakai blok fitur spektral dan klasifikasi, lalu latih", "Catat akurasi, matriks konfusi, dan perkiraan RAM, flash, dan latensi yang ditampilkan", "Pastikan data uji berasal dari sesi yang tidak dipakai saat latih"] },
+    t0i7: { t: ["Latensi inferensi: waktu dari data siap sampai hasil keluar", "Energi satu siklus = Σ (V × I × t) semua fase: bangun, sensing, inferensi, TX, RX, tidur", "Fase dominan biasanya TX radio atau inferensi; optimasi paling berguna di fase terboros", "Siklus kerja menentukan seberapa besar arus tidur memengaruhi total"],
+      p: ["Ekspor model sebagai pustaka Arduino dan jalankan di ESP32", "Ukur latensi inferensi dengan micros() sebelum dan sesudah pemanggilan", "Susun siklus: bangun → baca sensor → inferensi → kirim hasil LoRa → deep sleep", "Ukur arus tiap fase (INA219 dengan sampling cepat, atau profiler energi bila ada)", "Buat tabel energi tiap fase dengan kolom fase, arus, durasi, energi (mJ), dan persentase", "Tandai fase terboros dan tulis satu ide untuk menguranginya"] },
+    t0i8: { t: ["Tsym = 2^SF / BW; Tair = (Npre + 4,25) × Tsym + Npay × Tsym", "Airtime naik kira-kira dua kali lipat tiap kenaikan SF", "Duty cycle 1% berarti interval minimum dari awal satu paket ke awal paket berikutnya = 100 × Tair", "Energi satu pengiriman = arus TX × tegangan × Tair"],
+      p: ["Tulis fungsi airtime di Python berdasarkan rumus", "Bandingkan dengan kalkulator di halaman Jalur Belajar TinyML LPWAN atau kalkulator TTN; galat harus di bawah 5%", "Buat grafik airtime terhadap SF 7-12 untuk payload 10, 20, dan 50 byte", "Ukur airtime nyata di radio Anda (misalnya fungsi getTimeOnAir di RadioLib; periksa dokumentasi versi Anda) dan bandingkan dengan hitungan", "Hitung interval minimum paket untuk duty cycle 1% di tiap SF dan simpulkan berapa pesan per jam yang diizinkan"] },
+    t0i9: { t: ["Arsitektur LoRaWAN: node → gateway → network server → aplikasi", "Kelas A: node mengirim kapan saja lalu membuka dua jendela terima (RX1 dan RX2) sesudahnya; paling hemat daya", "Join OTAA: DevEUI, JoinEUI (AppEUI), dan AppKey menghasilkan kunci sesi; DevNonce mencegah pemutaran ulang", "ADR: server menilai margin SNR lalu menaikkan data rate atau menurunkan daya pancar"],
+      p: ["Daftar di The Things Network, buat aplikasi dan satu end device (OTAA) dengan frequency plan yang sesuai wilayah Anda", "Cek peta komunitas apakah ada gateway terdekat; jika tidak ada, kerjakan bagian menggambar dulu dan kembali ke bagian praktik di minggu 27", "Gambar diagram urutan join dan satu uplink beserta RX1 dan RX2 dengan kata sendiri", "Tulis lima kalimat tentang bagaimana ADR memutuskan SF dan daya", "Jika ada gateway, lihat uplink di Live Data dan catat SNR serta SF yang dipakai"] },
+    t0i10: { t: ["ALOHA murni: peluang sukses = e^(−2G), dengan G = N × τ / T (N node, τ airtime, T interval kirim)", "Mengapa PDR turun saat N naik: semakin banyak paket bersaing di udara", "Model energi E = Σ V × I × t dibandingkan dengan pengukuran", "Selisih model dan ukur sering berasal dari arus tidur, waktu bangun, dan efisiensi regulator"],
+      p: ["Hitung peluang sukses untuk N = 10, 100, dan 1000 dengan τ = 41 ms (SF7, payload 10 byte) dan T = 60 s. Hasil hitungan saya: sekitar 0,986; 0,872; dan 0,253", "Buat grafik peluang sukses terhadap N di notebook", "Ubah SF menjadi 10 dan hitung ulang; amati penurunannya", "Bangun model umur baterai dari siklus minggu 8 dan bandingkan dengan pengukuran", "Tulis tiga penyebab selisih yang paling mungkin"] },
+    t0i11: { t: ["Menyajikan hasil teknis: masalah, setup, hasil, batasan", "Reproduksibilitas: orang lain bisa mengulang dari dokumentasi Anda", "Membedakan hasil yang diukur dari hasil yang dihitung"],
+      p: ["Rapikan repositori: satu folder per minggu dan README di akar", "Tulis README: tujuan, perangkat, skema wiring (foto atau diagram), cara build, hasil, batasan", "Siapkan presentasi 10-15 menit: masalah, setup, hasil, dan selisih teori vs ukur", "Minta satu orang menjalankan proyek hanya dari README dan catat di mana ia tersandung", "Perbaiki README dan tutup celah yang ia temukan"] },
+
+    t1i0: { t: ["Array NumPy: shape, dtype, slicing, axis", "DataFrame pandas: indeks, groupby, rolling, resample", "Windowing: memotong deret waktu menjadi contoh data", "Memeriksa kualitas data: NaN, duplikat, outlier, satuan"],
+      p: ["Kerjakan Modul 0-4 di bagian Modul Python dan ML di bawah", "Muat CSV dari minggu 3-4 (atau data latihan) dan periksa NaN serta timestamp duplikat", "Buat grafik per kelas dan histogram", "Hitung statistik per jendela 1 detik", "Tulis tiga hal yang Anda temukan dari data sebelum memodelkan apa pun"] },
+    t1i1: { t: ["Overfitting dan underfitting; bias dan variansi", "Pembagian data per sesi dan kebocoran data", "Presisi, recall, F1, dan matriks konfusi", "Pohon keputusan dan regresi logistik sebagai model sederhana"],
+      p: ["Kerjakan Modul 5-6", "Latih dua algoritma (misalnya pohon keputusan dan regresi logistik) dan bandingkan F1 di validasi", "Coba GroupKFold agar tiap sesi bergantian menjadi data uji dan lihat sebaran skornya", "Gambar matriks konfusi dan jelaskan jenis kesalahan yang muncul", "Catat model mana yang paling mudah dipindahkan ke MCU dan mengapa"] },
+    t1i2: { t: ["Neuron, bobot, bias, dan fungsi aktivasi (ReLU, sigmoid)", "Perhitungan maju, kerugian (cross-entropy), dan gradient descent", "Konvolusi 1D: filter, kernel, stride, pooling, dan rumus panjang keluaran", "Menghitung jumlah parameter dengan tangan"],
+      p: ["Kerjakan Modul 7 dan Modul 8", "Ubah ukuran lapisan tersembunyi (misalnya 2, 8, 16) dan catat akurasi validasi serta jumlah parameter", "Ubah laju belajar dan amati perubahan kerugian (hasil variasi saya ada di Modul 7)", "Hitung jumlah parameter CNN dengan tangan sebelum melihat model.summary()", "Tulis kesimpulan: model terkecil yang masih cukup akurat"] },
+    t1i3: { t: ["Kuantisasi afin: q = round(x / skala) + titik_nol", "PTQ vs QAT: PTQ cepat tetapi akurasi bisa turun; QAT melatih model yang sadar kuantisasi", "Dataset representatif menentukan rentang nilai tiap lapisan", "Pruning dan distilasi sebagai cara lain mengecilkan model"],
+      p: ["Kerjakan Modul 9 sampai konversi int8", "Bandingkan float32 dan int8 pada data uji yang sama: akurasi, ukuran, dan waktu inferensi", "Ubah ukuran dataset representatif (misalnya 20 lalu 200 jendela) dan amati akurasi int8", "Jika akurasi turun lebih dari beberapa poin, coba QAT", "Buat tabel tiga baris: float32, int8 PTQ, dan int8 QAT (bila dicoba)"] },
+    t1i4: { t: ["Arsitektur TensorFlow Lite Micro: interpreter, op resolver, tensor arena", "Model disimpan sebagai FlatBuffer lalu dijadikan array C", "Hanya operator yang didukung yang bisa dijalankan di MCU", "Keluaran di MCU harus cocok dengan Python untuk masukan yang sama"],
+      p: ["Ubah .tflite menjadi array C dengan xxd -i", "Masukkan ke proyek TensorFlow Lite Micro atau Edge Impulse untuk ESP32", "Mulai dengan tensor arena kecil, amati kegagalan AllocateTensors, lalu naikkan sampai berhasil dan catat ukuran minimum", "Catat RAM, flash, dan latensi", "Kirim 20 jendela yang sama ke Python dan ke MCU, lalu bandingkan keluaran (harus nyaris sama)"] },
+    t1i5: { t: ["Energi per inferensi = V × I_inferensi × t_inferensi (kurangi baseline saat idle)", "Trade-off akurasi vs energi: pilih titik di kurva, bukan model terbesar", "Pengaruh clock, WiFi/Bluetooth, dan mode sleep terhadap total energi"],
+      p: ["Naikkan satu pin GPIO selama inferensi dan pakai sebagai penanda di pengukuran arus", "Ukur energi untuk dua atau tiga ukuran model", "Matikan WiFi dan Bluetooth, turunkan clock, dan lihat efeknya", "Buat grafik energi per inferensi terhadap akurasi", "Pilih titik terbaik dan tulis alasannya dalam dua kalimat"] },
+    t1i6: { t: ["Struktur makalah: pendahuluan, metode, hasil, diskusi", "Klaim vs bukti: tiap klaim harus punya data yang mendukung", "Validitas internal dan eksternal; baseline yang adil", "Metode tiga lintasan untuk membaca makalah"],
+      p: ["Baca satu survei LPWAN, satu survei TinyML, dan satu makalah ADR dengan metode tiga lintasan", "Isi matriks literatur untuk tiap makalah", "Tulis tiga kalimat per makalah: klaim, bukti, batasan", "Catat satu kritik Anda sendiri untuk tiap makalah", "Simpan di Zotero dengan tag topik"] },
+    t1i7: { t: ["Simulasi berbasis kejadian (discrete-event) dan peran seed acak", "Model propagasi log-distance dan efek capture pada tabrakan paket", "Struktur skenario: node, gateway, area, interval kirim, SF"],
+      p: ["Pasang ns-3 dengan modul LoRaWAN atau OMNeT++ dengan FLoRa mengikuti panduannya", "Jalankan skenario contoh dan baca log", "Ubah jumlah node (100, 200, 500) dan catat PDR", "Jalankan tiap konfigurasi dengan beberapa seed", "Catat waktu komputasi sebagai bahan perencanaan simulasi besar"] },
+    t1i8: { t: ["Algoritma ADR: margin SNR menentukan kenaikan data rate atau penurunan daya", "Metrik: PDR, energi per paket, dan fairness antar node (misalnya indeks Jain)", "Memisahkan parameter yang dilaporkan dari yang harus diasumsikan"],
+      p: ["Pilih satu makalah evaluasi ADR dan baca bagian skenarionya dua kali", "Buat tabel parameter: yang disebut makalah, yang tidak disebut, dan nilai asumsi Anda", "Susun skenario di simulator dengan parameter itu", "Jalankan satu konfigurasi sebagai uji awal", "Bandingkan satu titik hasil dengan grafik makalah sebagai uji kewajaran"] },
+    t1i9: { t: ["Hasil simulasi bersifat acak: laporkan rata-rata dan interval kepercayaan, bukan satu run", "Interval kepercayaan 95% untuk sampel kecil memakai distribusi t", "Sumber selisih: model kanal, parameter yang diasumsikan, jumlah ulangan"],
+      p: ["Jalankan tiap konfigurasi dengan 10 seed", "Hitung rata-rata dan interval kepercayaan 95%", "Buat grafik dengan error bar dan tumpuk dengan grafik makalah", "Tulis hipotesis penyebab selisih dan uji satu per satu dengan mengubah satu parameter", "Catat parameter mana yang paling berpengaruh"] },
+    t1i10: { t: ["Bandit: eksplorasi vs eksploitasi", "Epsilon-greedy dan regret kumulatif", "Reward harus mencerminkan tujuan: berhasil terkirim dikurangi biaya energi"],
+      p: ["Buat simulator kecil dengan enam lengan (SF7-SF12), peluang sukses tiap lengan, dan biaya energi sebanding airtime", "Implementasikan epsilon-greedy dan jalankan dengan epsilon 0,01; 0,1; dan 0,3", "Buat grafik regret kumulatif untuk tiap epsilon", "Bandingkan dengan strategi SF tetap", "Hitung biaya eksplorasi dalam jumlah paket yang gagal"] },
+    t1i11: { t: ["Sintesis literatur: mengelompokkan makalah menurut metode, metrik, dan batasan", "Mengenali celah: kombinasi yang belum diteliti", "Menilai kualitas bukti antar makalah"],
+      p: ["Baca 10 makalah tambahan dengan tiga lintasan", "Kelompokkan matriks menurut metode dan metrik", "Buat tabel metode × metrik dan cari sel yang kosong", "Tulis satu paragraf: pola yang berulang dan yang jarang dibahas", "Perbarui matriks hingga 20 makalah"] },
+    t1i12: { t: ["Pernyataan masalah, kontribusi, dan hipotesis yang dapat diuji (bisa terbukti salah)", "Kelayakan: perangkat, waktu, dan data yang tersedia", "Kriteria memilih topik: kebaruan, dampak, kelayakan, minat"],
+      p: ["Tulis 2-3 kandidat celah dengan pola: 'Pada kondisi X, metode Y punya kelemahan Z. Kami mengusulkan W dan mengukurnya dengan metrik M.'", "Beri skor 1-5 untuk kebaruan, dampak, kelayakan, dan minat", "Diskusikan dengan teman atau calon pembimbing", "Pilih satu dan tulis alasannya dalam satu paragraf", "Daftar risiko terbesar dan rencana cadangannya"] },
+    t1i13: { t: ["Komunikasi teknis: README yang bisa dijalankan orang lain", "Reproduksibilitas: versi pustaka, seed, dan data", "Menyajikan karya kepada calon pembimbing"],
+      p: ["Rapikan repositori publik dan tulis README (tujuan, perangkat, instalasi, cara menjalankan, hasil)", "Tambahkan requirements.txt dan lisensi", "Rekam demo 3 menit atau buat rangkaian gambar", "Minta satu orang menjalankan dari README", "Isi ulang skor kompetensi di halaman Jalur Belajar dan bandingkan dengan skor awal"] },
+
+    t2i0: { t: ["Struktur proposal riset: latar belakang, rumusan masalah, tujuan, metode, linimasa, risiko", "Kriteria kebaruan dan pertanyaan 'lalu kenapa?' (so what?)"],
+      p: ["Tulis kerangka satu halaman", "Uji tiap bagian dengan pertanyaan 'lalu kenapa?'", "Tambahkan 10 makalah ke matriks literatur"] },
+    t2i1: { t: ["Cara menilai lab: publikasi tiga tahun terakhir, topik, pendanaan, dan kegiatan alumni", "Etika menghubungi calon pembimbing: ringkas, spesifik, dan menunjukkan Anda sudah membaca karya mereka"],
+      p: ["Buat spreadsheet 5-8 lab dengan kolom topik, publikasi terbaru, syarat, dan tenggat", "Baca dua makalah dari tiap lab", "Tulis email maksimal 150 kata: siapa Anda, minat riset satu paragraf, tautan repositori, dan lampiran kerangka proposal"] },
+    t2i2: { t: ["Argumentasi tertulis: klaim, bukti, dan batasan", "Linimasa riset yang realistis dengan tonggak dan risiko"],
+      p: ["Tulis draf lengkap 5-8 halaman", "Minta umpan balik dari dua orang", "Revisi dengan daftar periksa: masalah jelas? celah didukung literatur? metode layak? linimasa realistis?"] },
+    t2i3: { t: ["Format tes bahasa Inggris yang diminta kampus (misalnya IELTS atau TOEFL)", "Kelengkapan dokumen akademik dan cara meminta rekomendasi"],
+      p: ["Jadwalkan tes dan latihan soal tiap minggu", "Tulis ringkasan satu paragraf berbahasa Inggris untuk satu makalah tiap minggu", "Siapkan ijazah, transkrip, CV akademik, dan minta surat rekomendasi dengan tenggat jelas"] },
+    t2i4: { t: ["Komponen aplikasi beasiswa: esai, rencana studi, dan rencana kontribusi", "Membaca syarat dan tenggat dari situs resmi"],
+      p: ["Buat daftar periksa syarat dari situs resmi kampus dan beasiswa", "Tulis esai dan minta satu orang membacanya", "Isi formulir dan simpan salinan"] },
+    t2i5: { t: ["Menjelaskan riset dalam 5 menit: masalah, pendekatan, hasil awal, rencana", "Pertanyaan wawancara yang umum: motivasi, kelayakan, dan kesiapan"],
+      p: ["Rekam diri selama 5 menit dan perbaiki", "Kumpulkan sepuluh pertanyaan sulit dan siapkan jawabannya", "Ulangi satu eksperimen kecil agar keterampilan praktik tetap terjaga"] },
+
+    t3i0: { t: ["Perumusan pertanyaan penelitian: masalah, metode usulan, pembanding, dan metrik", "Kerangka eksperimen yang bisa diulang: konfigurasi, seed, log"],
+      p: ["Tulis pertanyaan penelitian dan dua hipotesis yang bisa terbukti salah", "Tentukan metrik utama (misalnya energi per paket dan PDR)", "Siapkan templat repositori eksperimen dengan folder config, data, dan results"] },
+    t3i1: { t: ["Baseline dan evaluasi yang adil: parameter pembanding harus sama", "Statistik hasil simulasi: ulangan dan interval kepercayaan"],
+      p: ["Replikasi ADR standar dan satu metode ADR cerdas", "Jalankan minimal 5 seed per konfigurasi", "Buat tabel konfigurasi lengkap supaya orang lain bisa mengulang"] },
+    t3i2: { t: ["PRISMA: identifikasi, penyaringan, kelayakan, dan inklusi", "Model energi sistem: sensing, inferensi, dan transmisi"],
+      p: ["Tulis protokol pencarian: kata kunci, basis data, kriteria inklusi dan eksklusi", "Buat diagram alir PRISMA berisi jumlah makalah tiap tahap", "Bangun prototipe sensor-inferensi-LoRa dan ukur energi per siklus"] },
+    t3i3: { t: ["Struktur proposal kualifikasi dan makalah ilmiah", "Teknik tanya-jawab ujian: mengakui batasan dengan jelas"],
+      p: ["Tulis proposal kualifikasi dan serahkan ke pembimbing tiga minggu sebelum ujian", "Latihan ujian (mock defense) dua kali dengan teman lab", "Susun draf makalah survei atau konferensi"] },
+
+    t4i0: { t: ["Formulasi masalah optimasi: tujuan (energi, PDR) dan kendala (RAM, flash, latensi)", "Kompleksitas komputasi model di MCU"],
+      p: ["Tulis spesifikasi metode: masukan, keluaran, dan anggaran RAM, flash, dan energi", "Buat prototipe metode di simulator", "Uji kasus sederhana untuk memastikan logika benar sebelum skala besar"] },
+    t4i1: { t: ["QAT, pruning, dan distilasi", "Desain eksperimen simulasi: faktor, taraf, dan ulangan"],
+      p: ["Lakukan ablation: model besar vs kecil dan float vs int8", "Jalankan simulasi hingga 1.000+ node dan variasikan beban, SNR, mobilitas", "Catat waktu komputasi dan simpan hasil mentah"] },
+    t4i2: { t: ["Statistik: interval kepercayaan, uji hipotesis, ukuran efek", "Kontrol lingkungan eksperimen: daya, jarak, posisi antena"],
+      p: ["Jalankan minimal 5 ulangan per konfigurasi pada perangkat nyata", "Uji perbedaan metode vs baseline dengan uji yang sesuai dan laporkan ukuran efek", "Buat grafik dengan error bar dan tabel hasil"] },
+    t4i3: { t: ["Menulis makalah konferensi: abstrak, kontribusi, karya terkait, evaluasi", "Menanggapi komentar reviewer"],
+      p: ["Tulis makalah dan minta tinjauan internal oleh lab", "Perbaiki berdasarkan tinjauan lalu kirim", "Siapkan templat balasan untuk reviewer"] },
+
+    t5i0: { t: ["Desain testbed: lokasi, topologi, daya, regulasi, keselamatan, dan pemeliharaan", "Survei lokasi dan perkiraan link budget"],
+      p: ["Survei lokasi dan uji jangkauan sebelum memasang", "Pasang gateway dan node dan jalankan uji 1 minggu", "Catat semua masalah dan perbaikannya"] },
+    t5i1: { t: ["Kualitas data lapangan: logging, data hilang, kalibrasi sensor", "Mencatat konteks: cuaca, gangguan, dan perubahan pengaturan"],
+      p: ["Atur logging otomatis dan cadangan data", "Periksa data tiap hari dan catat anomali", "Catat perubahan lingkungan dan tindakan Anda"] },
+    t5i2: { t: ["Analisis selisih simulasi vs lapangan dan ancaman terhadap validitas", "Kalibrasi model dengan data pengukuran"],
+      p: ["Kalibrasi parameter model dari data lapangan", "Analisis residu: di mana model paling meleset?", "Tulis bagian batasan dan ancaman validitas"] },
+    t5i3: { t: ["Menulis makalah jurnal dan menanggapi reviewer poin demi poin", "Etika publikasi dan penulis"],
+      p: ["Tulis makalah dan lakukan tinjauan internal", "Kirim ke jurnal yang sesuai", "Balas tiap komentar reviewer dengan perubahan yang jelas"] },
+
+    t6i0: { t: ["Struktur disertasi: monograf atau kumpulan artikel (ikuti aturan kampus)", "Konsistensi notasi dan istilah antar bab"],
+      p: ["Sepakati kerangka bab dengan pembimbing", "Susun bab 1-3 dari makalah dan catatan", "Buat daftar notasi tunggal dan terapkan di semua bab"] },
+    t6i1: { t: ["Narasi hasil: urutan, interpretasi, dan batasan", "Konsistensi antara klaim dan bukti"],
+      p: ["Jalankan eksperimen tambahan yang diminta pembimbing", "Perbarui semua tabel dan grafik dengan gaya seragam", "Periksa tiap klaim punya bukti di bab hasil"] },
+    t6i2: { t: ["Paket reproduksibilitas: kode, data, lisensi, dan DOI (misalnya lewat Zenodo)", "Menyajikan disertasi dalam 20-30 menit"],
+      p: ["Rilis kode dan data dengan README dan lisensi", "Latihan presentasi dan catat pertanyaan yang muncul", "Revisi menyeluruh berdasarkan umpan balik"] },
+    t6i3: { t: ["Prosedur ujian kampus dan kriteria kelulusan", "Strategi menjawab pertanyaan sulit dan mengakui keterbatasan"],
+      p: ["Ajukan ujian sesuai prosedur dan tenggat kampus", "Lakukan mock defense dua sampai tiga kali dan buat daftar pertanyaan sulit", "Siapkan rencana perbaikan pasca ujian"] }
+  };
+
+  var GL = [
+    ["MCU", "Mikrokontroler: chip kecil berisi prosesor, memori, dan pin dalam satu paket."],
+    ["ESP32", "Keluarga MCU murah dengan WiFi dan Bluetooth; dipakai untuk belajar di sini."],
+    ["GPIO", "Pin serba guna yang bisa dipakai sebagai masukan atau keluaran digital."],
+    ["ADC", "Pengubah sinyal analog menjadi angka; resolusi 12-bit berarti 4096 tingkat."],
+    ["I2C / SPI / UART", "Tiga cara umum MCU berbicara dengan sensor dan modul radio."],
+    ["PWM", "Mengatur daya rata-rata dengan menyalakan dan mematikan sinyal sangat cepat."],
+    ["Deep sleep", "Mode tidur paling hemat; hampir semua bagian chip mati sampai dibangunkan."],
+    ["LoRa", "Teknik modulasi radio untuk jarak jauh dengan daya kecil dan laju data rendah."],
+    ["SF, BW, CR", "Spreading factor, bandwidth, dan coding rate: tiga pengaturan utama LoRa yang menentukan jangkauan dan lama kirim."],
+    ["Airtime", "Lama sebuah paket mengudara; makin besar SF dan payload, makin lama."],
+    ["Duty cycle", "Batas persentase waktu perangkat boleh memancar, diatur regulasi."],
+    ["RSSI / SNR", "Kuat sinyal diterima dan rasio sinyal terhadap derau."],
+    ["PDR", "Packet delivery ratio: persentase paket yang sampai."],
+    ["LoRaWAN", "Protokol jaringan di atas LoRa: node, gateway, network server."],
+    ["ADR", "Adaptive data rate: server mengatur SF dan daya pancar node secara otomatis."],
+    ["OTAA / ABP", "Dua cara node bergabung ke jaringan LoRaWAN; OTAA lebih aman dan umum."],
+    ["TinyML", "Menjalankan model machine learning di perangkat berdaya dan memori sangat kecil."],
+    ["Inferensi", "Memakai model yang sudah dilatih untuk memprediksi data baru."],
+    ["Kuantisasi", "Mengecilkan model dengan angka berpresisi rendah, misalnya float32 menjadi int8."],
+    ["Overfitting", "Model hafal data latih tetapi buruk pada data baru."],
+    ["F1", "Ukuran gabungan presisi dan recall; berguna saat kelas tidak seimbang."],
+    ["Baseline", "Metode pembanding yang harus dikalahkan agar klaim Anda bermakna."],
+    ["Reproduksibilitas", "Orang lain bisa mengulang eksperimen dan mendapat hasil serupa."],
+    ["Matriks literatur", "Tabel ringkasan makalah: masalah, metode, metrik, baseline, batasan."]
+  ];
+
+  /* ---- render ---- */
+  var host = document.getElementById("stages"), html = "", ids = [];
+  STAGES.forEach(function (s) {
+    var b = '<div class="sumry">';
+    s.sum.forEach(function (r) { b += '<div class="row"><i>' + esc(r[0]) + '</i><p>' + esc(r[1]) + '</p></div>'; });
+    b += '</div>';
+    s.items.forEach(function (it, i) {
+      var id = s.id + "i" + i; ids.push(id);
+      var label, title, rows;
+      if (s.type === "w") {
+        label = (typeof it[0] === "number" ? "Minggu " + it[0] : it[0]); title = it[1];
+        rows = [["Pelajari", it[2]], ["Kerjakan", it[3]], ["Uji diri", it[4]], ["Hasil", it[5], "out"]];
+      } else {
+        label = it[0]; title = it[1];
+        rows = [["Fokus", it[2]], ["Kerjakan", it[3]], ["Hasil", it[4], "out"]];
+      }
+      b += '<div class="item" data-id="' + id + '"><label class="ih" for="' + id + '"><input type="checkbox" id="' + id + '" data-st="' + s.id + '"><span><small>' + esc(label) + '</small>' + esc(title) + '</span></label>';
+      var tp = TP[id];
+      if (tp) { rows.splice(1, 0, ["Teori", tp.t, "ul"]); rows.splice(3, 0, ["Praktikum", tp.p, "ol"]); }
+      rows.forEach(function (r) {
+        var inner = Array.isArray(r[1])
+          ? '<' + r[2] + '>' + r[1].map(function (x) { return '<li>' + esc(x) + '</li>'; }).join("") + '</' + r[2] + '>'
+          : '<p>' + esc(r[1]) + '</p>';
+        b += '<div class="row' + (r[2] === "out" ? " out" : "") + '"><i>' + r[0] + '</i>' + inner + '</div>';
+      });
+      b += '</div>';
+    });
+    var gid = s.id + "g"; ids.push(gid);
+    b += '<label class="gate" for="' + gid + '"><input type="checkbox" id="' + gid + '" data-st="' + s.id + '"><span><small>Gerbang</small>' + esc(s.gate) + '</span></label>';
+    html += '<details class="stage' + (s.d ? " d" : "") + '" id="' + s.id + '"' + (s.open ? " open" : "") + '><summary><span class="node" aria-hidden="true">' + s.node + '</span><span class="sh"><span class="when"><b>' + esc(s.when) + '</b></span><h3>' + esc(s.title) + '</h3></span><span class="cnt" data-cnt="' + s.id + '"></span></summary><div class="body">' + b + '</div></details>';
+  });
+  host.innerHTML = html;
+
+  var cbs = host.querySelectorAll("input[type=checkbox]");
+  function refresh() {
+    var total = cbs.length, done = 0, per = {};
+    cbs.forEach(function (c) {
+      var st = c.getAttribute("data-st");
+      if (!per[st]) per[st] = [0, 0];
+      per[st][1]++;
+      if (c.checked) { done++; per[st][0]++; }
+      var it = c.closest(".item"); if (it) it.classList.toggle("done", c.checked);
+    });
+    Object.keys(per).forEach(function (k) {
+      var el = host.querySelector('[data-cnt="' + k + '"]');
+      if (el) el.textContent = per[k][0] + "/" + per[k][1];
+    });
+    var pct = Math.round(done / total * 100);
+    document.getElementById("progbar").style.width = pct + "%";
+    document.getElementById("prog").setAttribute("aria-valuenow", pct);
+    document.getElementById("progtxt").textContent = done + " dari " + total + " langkah selesai (" + pct + "%)";
+    document.getElementById("sum").textContent = done + "/" + total + " selesai";
+  }
+  cbs.forEach(function (c) {
+    c.checked = store("pj2-" + c.id) === "1";
+    c.addEventListener("change", function () { store("pj2-" + c.id, c.checked ? "1" : "0"); refresh(); });
+  });
+  refresh();
+
+  document.getElementById("open-all").addEventListener("click", function () { host.querySelectorAll("details").forEach(function (d) { d.open = true; }); });
+  document.getElementById("close-all").addEventListener("click", function () { host.querySelectorAll("details").forEach(function (d) { d.open = false; }); });
+
+  var g = ""; GL.forEach(function (t) { g += "<div><dt>" + esc(t[0]) + "</dt><dd>" + esc(t[1]) + "</dd></div>"; });
+  document.getElementById("gl").innerHTML = g;
+})();
+</script>
+<script>
+(function () {
+  function esc(s) { var d = document.createElement("div"); d.textContent = s; return d.innerHTML; }
+
+  var MOD = [
+    { n: 0, title: "Siapkan lingkungan dan data latihan", week: "Minggu 13", dur: "± 1 jam",
+      goal: "Punya folder kerja, pustaka terpasang, dan satu berkas data sensor yang dipakai semua pelajaran berikutnya.",
+      concepts: [
+        "Data latihan ini sintetis: 20 sesi, masing-masing 30 detik, 50 sampel per detik, tiga sumbu akselerometer (ax, ay, az) dalam satuan g. Sepuluh sesi berkelas diam dan sepuluh berkelas goyang.",
+        "Tujuannya agar Anda bisa belajar sebelum punya sensor. Setelah data nyata dari minggu 3-4 ada, ganti berkasnya dengan format kolom yang sama.",
+        "Kolom sesi penting: satu sesi adalah satu perekaman utuh, dan nanti dipakai untuk memisahkan data latih dan uji dengan benar."
+      ],
+      file: "l0_buat_data.py",
+      code: `import numpy as np
+import pandas as pd
+
+rng = np.random.default_rng(42)
+fs = 50  # 50 sampel per detik
+
+def sesi(label, detik, amp, sesi_id):
+    t = np.arange(detik * fs) / fs
+    f = rng.uniform(2, 4) if label == "goyang" else 0.0
+    ax = amp * np.sin(2 * np.pi * f * t) + rng.normal(0, 0.05, t.size)
+    ay = 0.6 * amp * np.sin(2 * np.pi * f * t + 1) + rng.normal(0, 0.05, t.size)
+    az = 1.0 + 0.2 * amp * np.sin(2 * np.pi * f * t) + rng.normal(0, 0.05, t.size)
+    return pd.DataFrame({"sesi": sesi_id, "t": t, "ax": ax, "ay": ay, "az": az, "label": label})
+
+frames = []
+for i in range(10):
+    frames.append(sesi("diam", 30, 0.0, f"s{i:02d}"))
+    frames.append(sesi("goyang", 30, rng.uniform(0.5, 1.5), f"g{i:02d}"))
+
+data = pd.concat(frames, ignore_index=True)
+data.to_csv("sensor.csv", index=False)
+print(data.shape)`,
+      out: "(30000, 6)",
+      test: ["Mengapa jumlah barisnya 30000? (20 sesi × 30 detik × 50 sampel per detik)", "Mengapa az bernilai sekitar 1 saat diam? (gravitasi 1 g pada sumbu z)"],
+      err: ["FileNotFoundError saat pelajaran lain: jalankan semua skrip dari folder yang sama dengan sensor.csv.", "Mengubah nilai seed lalu heran angka berbeda dari halaman ini: itu wajar."] },
+
+    { n: 1, title: "Python dasar yang dipakai untuk data", week: "Minggu 13", dur: "± 2 jam",
+      goal: "Menulis fungsi kecil dan memakai list serta dictionary tanpa melihat contoh.",
+      concepts: [
+        "List menyimpan urutan nilai; dictionary memetakan nama ke nilai (misalnya nama kelas ke angka).",
+        "Fungsi dibuat dengan def dan mengembalikan nilai dengan return.",
+        "Rata-rata dan RMS (akar rata-rata kuadrat) adalah dua cara meringkas sinyal. RMS peka pada besar getaran walau rata-ratanya mendekati nol."
+      ],
+      file: "l1_python.py",
+      code: `suhu = [27.1, 27.3, 26.9, 27.4]
+
+def rata_rata(x):
+    return sum(x) / len(x)
+
+def rms(x):
+    return (sum(v * v for v in x) / len(x)) ** 0.5
+
+print(round(rata_rata(suhu), 3), round(rms(suhu), 3))
+
+kelas = {"diam": 0, "goyang": 1}
+for nama, angka in kelas.items():
+    print(nama, "->", angka)`,
+      out: "27.175 27.176\ndiam -> 0\ngoyang -> 1",
+      test: ["Beda list dan dictionary? Kapan memilih masing-masing?", "Kapan RMS jauh lebih besar dari rata-rata? (sinyal bolak-balik di sekitar nol)", "Mengapa model memerlukan label berupa angka (0 dan 1)?"],
+      err: ["IndentationError: isi fungsi dan loop harus menjorok dengan spasi yang konsisten.", "Pembagian dengan len(x) bernilai nol bila list kosong."] },
+
+    { n: 2, title: "NumPy: array, bentuk, dan operasi tanpa loop", week: "Minggu 13", dur: "± 3 jam",
+      goal: "Membaca shape sebuah array, mengiris sebagian, dan menghitung statistik per sumbu tanpa menulis loop.",
+      concepts: [
+        "Array NumPy punya shape, misalnya (100, 3) berarti 100 baris dan 3 kolom. Hampir semua error awal berasal dari shape yang tidak cocok.",
+        "Slicing: a[:, 0] mengambil kolom pertama, a[10:20] mengambil baris 10 sampai 19.",
+        "axis=0 berarti menghitung sepanjang baris (hasil satu angka per kolom); axis=1 sepanjang kolom.",
+        "Operasi vektor (a ** 2).mean(axis=0) jauh lebih cepat dan lebih ringkas daripada loop, dan memakai pola yang sama dengan inferensi di MCU.",
+        "np.std memakai ddof=0 secara bawaan, sedangkan pandas .std() memakai ddof=1. Selisihnya kecil pada data besar tetapi bisa terlihat pada jendela kecil."
+      ],
+      file: "l2_numpy.py",
+      code: `import numpy as np
+
+x = np.array([0.1, 0.4, -0.2, 0.9])
+print(x.shape, x.mean(), x.std(), np.sqrt(np.mean(x ** 2)))
+
+t = np.arange(0, 2, 1 / 50)
+sinyal = np.sin(2 * np.pi * 3 * t) + np.random.default_rng(0).normal(0, 0.1, t.size)
+print(sinyal.shape, sinyal[:3])
+
+a = np.random.default_rng(1).random((100, 3))
+print(a[:, 0].shape, a[10:20].shape, a.mean(axis=0).shape)
+
+# tanpa loop
+rms_v = np.sqrt((a ** 2).mean(axis=0))
+print(rms_v.shape)`,
+      out: "(4,) 0.3 0.4062019202317981 0.5049752469181039\n(100,) [0.01257302 0.35491407 0.74858937]\n(100,) (10, 3) (3,)\n(3,)",
+      test: ["Apa shape dari a.mean(axis=0) bila a berbentuk (100, 3), dan mengapa?", "Berapa banyak sampel dalam np.arange(0, 2, 1/50)? (100)", "Mengapa x.std() di NumPy dan .std() di pandas bisa memberi angka berbeda?"],
+      err: ["ValueError: operands could not be broadcast: shape kedua array tidak cocok, cetak a.shape dan b.shape.", "Lupa bahwa slicing menghasilkan tampilan (view) yang bisa ikut mengubah array asli; pakai .copy() bila perlu."] },
+
+    { n: 3, title: "pandas: membaca, memeriksa, dan meringkas data", week: "Minggu 13", dur: "± 3 jam",
+      goal: "Memuat CSV, memeriksa kualitas data, meringkas per kelas, dan memakai jendela waktu.",
+      concepts: [
+        "DataFrame adalah tabel dengan kolom bernama. Selalu mulai dengan head(), shape, value_counts(), dan isna().sum() sebelum memodelkan apa pun.",
+        "groupby memisahkan data per kelas lalu meringkas; agg menghitung beberapa statistik sekaligus.",
+        "rolling dan resample membutuhkan indeks waktu (DatetimeIndex). Nilai pertama rolling berisi NaN karena jendelanya belum penuh.",
+        "Dari hasil di bawah terlihat bahwa simpangan baku ax pada kelas goyang (0,704) jauh lebih besar daripada kelas diam (0,050). Selisih inilah yang nanti dipakai model sebagai fitur."
+      ],
+      file: "l3_pandas.py",
+      code: `import pandas as pd
+
+df = pd.read_csv("sensor.csv")
+print(df.head(3))
+print(df.shape)
+print(df["label"].value_counts())
+print(df.groupby("label")[["ax", "ay", "az"]].agg(["mean", "std"]).round(3))
+print(df.isna().sum().sum())
+
+s = df[df.sesi == "g00"].copy()
+s["waktu"] = pd.to_datetime(s["t"], unit="s")
+s = s.set_index("waktu")
+print(s[["ax"]].rolling("1s").std().head(3))
+print(s[["ax"]].resample("1s").mean().head(3))`,
+      out: `  sesi     t        ax        ay        az label
+0  s00  0.00  0.015236 -0.028315  1.062451  diam
+1  s00  0.02 -0.051999 -0.031230  1.034385  diam
+2  s00  0.04  0.037523  0.066257  1.098306  diam
+(30000, 6)
+label
+diam      15000
+goyang    15000
+Name: count, dtype: int64
+           ax          ay            az
+         mean    std mean    std   mean    std
+label
+diam   -0.001  0.050 -0.0  0.050  1.000  0.050
+goyang  0.002  0.704 -0.0  0.425  1.001  0.149
+0
+                               ax
+waktu
+1970-01-01 00:00:00.000       NaN
+1970-01-01 00:00:00.020  0.335908
+1970-01-01 00:00:00.040  0.353437
+                           ax
+waktu
+1970-01-01 00:00:00  0.047685
+1970-01-01 00:00:01  0.024477
+1970-01-01 00:00:02 -0.065695`,
+      test: ["Mengapa data harus diperiksa dengan isna().sum() sebelum dilatih?", "Mengapa kelas diam dan goyang sama banyak (15000) penting untuk akurasi?", "Mengapa tanggal pada keluaran tertulis 1970? (kita memakai detik sebagai waktu, bukan tanggal kalender)"],
+      err: ["Memakai rolling(\"1s\") tanpa indeks waktu: muncul TypeError. Ubah dulu ke DatetimeIndex.", "SettingWithCopyWarning: tambahkan .copy() setelah memfilter baris sebelum mengubah kolom."] },
+
+    { n: 4, title: "matplotlib: melihat sinyal sebelum memodelkan", week: "Minggu 13", dur: "± 2 jam",
+      goal: "Membuat grafik sinyal per kelas dan histogram yang menunjukkan apakah dua kelas bisa dibedakan.",
+      concepts: [
+        "Lihat data dulu: grafik sinyal mentah menunjukkan pola, derau, dan kesalahan sensor yang tidak tampak di angka ringkasan.",
+        "Histogram sumbu ax per kelas seharusnya berbentuk sempit di sekitar nol untuk diam (simpangan baku 0,05) dan lebar untuk goyang (0,70), sesuai angka di pelajaran 3.",
+        "Pada grafik selalu beri sumbu, satuan, dan judul agar grafik bisa langsung dimasukkan ke laporan."
+      ],
+      file: "l4_plot.py",
+      code: `import matplotlib
+matplotlib.use("Agg")  # hanya untuk uji di server; di laptop/Colab baris ini tidak perlu
+import matplotlib.pyplot as plt
+import pandas as pd
+
+df = pd.read_csv("sensor.csv")
+
+fig, axs = plt.subplots(2, 1, figsize=(8, 5), sharex=True)
+for ax_, nama in zip(axs, ["diam", "goyang"]):
+    potong = df[df.label == nama].iloc[:150]
+    ax_.plot(potong["t"], potong["ax"], label="ax")
+    ax_.plot(potong["t"], potong["ay"], label="ay")
+    ax_.plot(potong["t"], potong["az"], label="az")
+    ax_.set_title(nama)
+    ax_.set_ylabel("percepatan (g)")
+    ax_.legend(loc="upper right")
+axs[-1].set_xlabel("waktu (detik)")
+fig.tight_layout()
+fig.savefig("sinyal.png", dpi=120)
+
+plt.figure(figsize=(5, 3))
+for nama in ["diam", "goyang"]:
+    plt.hist(df[df.label == nama]["ax"], bins=40, alpha=0.6, label=nama)
+plt.xlabel("ax (g)")
+plt.ylabel("jumlah sampel")
+plt.legend()
+plt.tight_layout()
+plt.savefig("hist.png", dpi=120)
+print("ok")`,
+      out: "ok\n(dua berkas dibuat: sinyal.png dan hist.png)",
+      test: ["Apa yang Anda lihat di grafik goyang yang tidak ada di grafik diam?", "Jika histogram dua kelas saling menumpuk hampir seluruhnya, apa artinya bagi model?"],
+      err: ["Di laptop atau Colab, hapus baris matplotlib.use(\"Agg\") dan tambahkan plt.show() agar grafik tampil.", "Lupa tight_layout sehingga judul atau label saling menimpa."] },
+
+    { n: 5, title: "Windowing dan fitur: dari sinyal ke tabel", week: "Minggu 14", dur: "± 3 jam",
+      goal: "Memotong sinyal menjadi jendela 1 detik dan mengubah tiap jendela menjadi 15 fitur.",
+      concepts: [
+        "Model tidak menerima 'sinyal tak terbatas'. Sinyal dipotong menjadi jendela: di sini 50 sampel (1 detik) dengan langkah 25 (geser 0,5 detik), jadi tiap jendela tumpang tindih setengahnya.",
+        "Tiap sesi 1500 sampel menghasilkan (1500 − 50) / 25 + 1 = 59 jendela. Dua puluh sesi menghasilkan 1180 jendela, sesuai keluaran di bawah.",
+        "Lima statistik per sumbu (rata-rata, simpangan baku, minimum, maksimum, RMS) × 3 sumbu = 15 fitur.",
+        "Kaitan dengan TinyML: satu jendela mentah 50 × 3 sampel memakai 600 byte sebagai float32 dan 150 byte sebagai int8. Ukuran jendela langsung memengaruhi RAM dan energi.",
+        "Berkas jendela.npz menyimpan jendela mentah (Xr, untuk CNN), fitur (Xf, untuk pohon dan jaringan NumPy), label (y), dan nama sesi (grup)."
+      ],
+      file: "l5_fitur.py",
+      code: `import numpy as np
+import pandas as pd
+
+df = pd.read_csv("sensor.csv")
+N, LANGKAH = 50, 25   # jendela 1 detik, geser 0,5 detik pada 50 Hz
+
+def jendela(df, n=N, langkah=LANGKAH):
+    X, y, grup = [], [], []
+    for sid, g in df.groupby("sesi"):
+        v = g[["ax", "ay", "az"]].to_numpy()
+        for i in range(0, len(v) - n + 1, langkah):
+            w = v[i:i + n]
+            X.append(w)
+            y.append(g["label"].iloc[0])
+            grup.append(sid)
+    return np.array(X), np.array(y), np.array(grup)
+
+def fitur(W):
+    return np.concatenate([
+        W.mean(axis=1), W.std(axis=1), W.min(axis=1), W.max(axis=1),
+        np.sqrt((W ** 2).mean(axis=1)),
+    ], axis=1)
+
+Xr, y, grup = jendela(df)
+Xf = fitur(Xr)
+print(Xr.shape, Xf.shape, y.shape, np.unique(grup).size)
+np.savez("jendela.npz", Xr=Xr, Xf=Xf, y=y, grup=grup)`,
+      out: "(1180, 50, 3) (1180, 15) (1180,) 20",
+      test: ["Mengapa jendela dibuat tumpang tindih, dan apa risikonya bagi evaluasi? (jendela bertetangga mirip; lihat pelajaran 6)", "Berapa byte RAM satu jendela int8 bila Anda memperpanjangnya menjadi 2 detik? (300 byte)", "Mengapa jendela dibuat per sesi, bukan dari seluruh data digabung? (agar jendela tidak melintasi dua perekaman)"],
+      err: ["Memotong jendela dari data yang digabung semua sesi: satu jendela bisa memuat dua kelas sekaligus.", "Mengacak jendela lalu membagi acak: jendela tetangga dari sesi yang sama masuk ke latih dan uji (kebocoran data)."] },
+
+    { n: 6, title: "Pohon keputusan dan evaluasi yang jujur", week: "Minggu 14", dur: "± 3 jam",
+      goal: "Melatih model pertama, mengevaluasinya dengan F1 dan matriks konfusi, dan memisahkan data berdasarkan sesi.",
+      concepts: [
+        "Data dibagi tiga: latih (untuk belajar), validasi (untuk memilih pengaturan), uji (disentuh sekali di akhir).",
+        "Pembagian dilakukan per sesi. Jendela dari satu sesi mirip satu sama lain; jika sebagian masuk latih dan sebagian masuk uji, skor tampak bagus tetapi tidak berlaku untuk perekaman baru.",
+        "Matriks konfusi menampilkan benar dan salah per kelas. F1 menggabungkan presisi dan recall; lebih berguna daripada akurasi saat kelas tidak seimbang.",
+        "Hasil di bawah terlalu sempurna (F1 1,0, pohon hanya satu belahan). Itu tanda tugasnya terlalu mudah, bukan tanda model hebat: goyangan sintetis kuat dan derau kecil. Dalam uji terpisah saya, ketika amplitudo goyang dilemahkan menjadi 0,05-0,15 g, F1 turun menjadi sekitar 0,95.",
+        "Pohon keputusan sangat cocok untuk MCU: model akhir hanya berupa beberapa if-else, tanpa pustaka ML."
+      ],
+      file: "l6_sklearn.py",
+      code: `import numpy as np
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.metrics import f1_score, confusion_matrix
+
+d = np.load("jendela.npz")
+Xf, y, grup = d["Xf"], d["y"], d["grup"]
+
+# pisahkan per SESI, bukan per jendela
+sesi_uji = ["g08", "g09", "s08", "s09"]
+sesi_val = ["g06", "g07", "s06", "s07"]
+te = np.isin(grup, sesi_uji)
+va = np.isin(grup, sesi_val)
+tr = ~(te | va)
+print("latih/val/uji:", tr.sum(), va.sum(), te.sum())
+
+model = DecisionTreeClassifier(max_depth=4, random_state=0).fit(Xf[tr], y[tr])
+for nama, m in [("val", va), ("uji", te)]:
+    pred = model.predict(Xf[m])
+    print(nama, "F1 goyang:", round(f1_score(y[m], pred, pos_label="goyang"), 3))
+print(confusion_matrix(y[te], model.predict(Xf[te]), labels=["diam", "goyang"]))
+print("kedalaman:", model.get_depth(), "daun:", model.get_n_leaves())`,
+      out: "latih/val/uji: 708 236 236\nval F1 goyang: 1.0\nuji F1 goyang: 1.0\n[[118   0]\n [  0 118]]\nkedalaman: 1 daun: 2",
+      test: ["Mengapa data uji tidak boleh dipakai untuk memilih max_depth?", "Mengapa membagi per sesi lebih jujur daripada membagi acak per jendela?", "Hasil F1 = 1,0 itu kabar baik atau tanda curiga? Apa yang akan Anda periksa?"],
+      err: ["Mengukur akurasi saja pada data tidak seimbang: model yang selalu menebak kelas mayoritas tampak bagus.", "Memilih pengaturan berdasarkan skor uji, lalu melaporkan skor uji yang sama."] },
+
+    { n: 7, title: "Jaringan saraf dari nol dengan NumPy", week: "Minggu 15", dur: "± 4 jam",
+      goal: "Memahami apa yang terjadi di dalam jaringan saraf kecil: perhitungan maju, kerugian, dan pembaruan bobot.",
+      concepts: [
+        "Satu neuron menghitung jumlah berbobot masukan ditambah bias, lalu melewatkannya ke fungsi aktivasi (di sini ReLU di lapisan tersembunyi dan sigmoid di keluaran).",
+        "Perhitungan maju: masukan 15 fitur → 8 neuron tersembunyi → 1 keluaran berupa peluang kelas goyang.",
+        "Kerugian (binary cross-entropy) mengukur seberapa jauh peluang dari label. Pelatihan menggeser bobot sedikit demi sedikit ke arah yang menurunkan kerugian (gradient descent, laju belajar 0,1).",
+        "Normalisasi (kurangi rata-rata, bagi simpangan baku) dihitung hanya dari data latih, lalu dipakai ke validasi dan uji. Nilai yang sama harus disimpan dan dipakai di firmware.",
+        "Jumlah parameter = 15 × 8 + 8 + 8 × 1 + 1 = 137. Model sekecil ini sudah cukup untuk tugas sintetis ini dan muat di MCU mana pun."
+      ],
+      file: "l7_numpy_nn.py",
+      code: `import numpy as np
+
+d = np.load("jendela.npz")
+Xf, y, grup = d["Xf"], d["y"], d["grup"]
+yi = (y == "goyang").astype(float)
+
+te = np.isin(grup, ["g08", "g09", "s08", "s09"])
+va = np.isin(grup, ["g06", "g07", "s06", "s07"])
+tr = ~(te | va)
+
+mu, sd = Xf[tr].mean(axis=0), Xf[tr].std(axis=0) + 1e-8   # hanya dari data latih
+Xn = (Xf - mu) / sd
+
+rng = np.random.default_rng(0)
+H = 8                                    # neuron lapisan tersembunyi
+W1 = rng.normal(0, 0.3, (Xn.shape[1], H)); b1 = np.zeros(H)
+W2 = rng.normal(0, 0.3, (H, 1));           b2 = np.zeros(1)
+
+def maju(X):
+    h = np.maximum(0, X @ W1 + b1)        # ReLU
+    p = 1 / (1 + np.exp(-(h @ W2 + b2)))  # sigmoid
+    return h, p.ravel()
+
+lr = 0.1
+for epoch in range(200):
+    h, p = maju(Xn[tr])
+    loss = -np.mean(yi[tr] * np.log(p + 1e-9) + (1 - yi[tr]) * np.log(1 - p + 1e-9))
+    dz2 = (p - yi[tr])[:, None] / tr.sum()
+    dW2 = h.T @ dz2;  db2 = dz2.sum(axis=0)
+    dh = dz2 @ W2.T;  dh[h <= 0] = 0
+    dW1 = Xn[tr].T @ dh;  db1 = dh.sum(axis=0)
+    W2 -= lr * dW2; b2 -= lr * db2; W1 -= lr * dW1; b1 -= lr * db1
+    if epoch % 50 == 0:
+        _, pv = maju(Xn[va])
+        print(epoch, "loss latih", round(loss, 4), "akurasi val", round(np.mean((pv > 0.5) == (yi[va] == 1)), 3))
+
+_, pu = maju(Xn[te])
+print("akurasi uji:", round(np.mean((pu > 0.5) == (yi[te] == 1)), 3))
+print("jumlah parameter:", W1.size + b1.size + W2.size + b2.size)`,
+      out: "0 loss latih 0.7952 akurasi val 0.636\n50 loss latih 0.0619 akurasi val 0.97\n100 loss latih 0.0259 akurasi val 0.987\n150 loss latih 0.0146 akurasi val 0.992\nakurasi uji: 1.0\njumlah parameter: 137",
+      test: ["Mengapa kerugian turun dari 0,80 ke 0,01 sementara akurasi validasi naik dari 0,64 ke 0,99?", "Apa yang terjadi bila laju belajar dibuat 10 (terlalu besar) atau 0,0001 (terlalu kecil)? Coba ubah lr dan amati.", "Mengapa mu dan sd tidak boleh dihitung dari seluruh data?", "Hitung jumlah parameter bila lapisan tersembunyi menjadi 16 neuron. (15 × 16 + 16 + 16 + 1 = 273)"],
+      err: ["Lupa menormalisasi: pelatihan lambat atau kerugian menjadi NaN.", "Menghitung mu dan sd dari data uji: skor tampak lebih baik daripada kenyataan.", "Hasil Anda berbeda dari halaman ini: periksa seed dan apakah data sensor.csv dibuat dengan kode pelajaran 0."] },
+
+    { n: 8, title: "CNN 1D dengan Keras untuk sinyal sensor", week: "Minggu 15", dur: "± 4 jam",
+      goal: "Melatih jaringan konvolusi kecil langsung dari jendela mentah (tanpa fitur buatan) dan memahami bentuk data di tiap lapisan.",
+      concepts: [
+        "CNN 1D menggeser filter kecil sepanjang waktu untuk mendeteksi pola lokal (misalnya satu ayunan). Masukan berbentuk (jumlah jendela, 50, 3): 50 langkah waktu dan 3 kanal sumbu.",
+        "Bentuk keluaran tiap lapisan: Conv1D(8, 5) → (46, 8); MaxPooling1D(2) → (23, 8); Conv1D(16, 3) → (21, 16); GlobalAveragePooling1D → (16); Dense(1) → (1).",
+        "Jumlah parameter: (5 × 3 × 8 + 8) + (3 × 8 × 16 + 16) + (16 + 1) = 128 + 400 + 17 = 545. Angka ini harus sama dengan yang ditampilkan model.summary().",
+        "Normalisasi per sumbu memakai statistik data latih; nilai yang dipakai di bawah (mu = [0, 0, 1], sd = [0,512, 0,310, 0,113]) berasal dari run saya dan akan Anda dapati sama jika memakai data yang sama.",
+        "Dibandingkan jaringan NumPy 137 parameter, CNN lebih besar tetapi tidak perlu fitur buatan; di data nyata yang rumit, CNN biasanya lebih unggul."
+      ],
+      untested: true,
+      file: "l8_keras_cnn.py",
+      code: `import numpy as np
+from tensorflow import keras
+from tensorflow.keras import layers
+
+keras.utils.set_random_seed(0)
+
+d = np.load("jendela.npz")
+Xr, y, grup = d["Xr"], d["y"], d["grup"]
+yi = (y == "goyang").astype("float32")
+
+te = np.isin(grup, ["g08", "g09", "s08", "s09"])
+va = np.isin(grup, ["g06", "g07", "s06", "s07"])
+tr = ~(te | va)
+
+mu = Xr[tr].mean(axis=(0, 1))
+sd = Xr[tr].std(axis=(0, 1))
+Xn = ((Xr - mu) / sd).astype("float32")
+print(Xn[tr].shape, Xn[va].shape, Xn[te].shape, mu.round(3), sd.round(3))
+
+model = keras.Sequential([
+    layers.Input(shape=(50, 3)),
+    layers.Conv1D(8, 5, activation="relu"),
+    layers.MaxPooling1D(2),
+    layers.Conv1D(16, 3, activation="relu"),
+    layers.GlobalAveragePooling1D(),
+    layers.Dense(1, activation="sigmoid"),
+])
+model.summary()
+
+model.compile(optimizer="adam", loss="binary_crossentropy", metrics=["accuracy"])
+model.fit(Xn[tr], yi[tr], validation_data=(Xn[va], yi[va]),
+          epochs=20, batch_size=32, verbose=2)
+print("uji (loss, akurasi):", model.evaluate(Xn[te], yi[te], verbose=0))
+
+model.save("model.keras")
+np.savez("norm.npz", mu=mu, sd=sd)`,
+      out: "Baris pertama (sudah saya jalankan dengan NumPy):\n(708, 50, 3) (236, 50, 3) (236, 50, 3) [0. 0. 1.] [0.512 0.31  0.113]\n\nYang seharusnya terlihat dari model.summary() (dihitung dari rumus, belum dijalankan):\nTotal params: 545\nBentuk keluaran: (None, 46, 8) → (None, 23, 8) → (None, 21, 16) → (None, 16) → (None, 1)",
+      test: ["Mengapa masukan Keras berbentuk (jumlah jendela, 50, 3) dan bukan (jumlah jendela, 150)?", "Bagaimana panjang 46 muncul dari 50 dan filter 5? (50 − 5 + 1)", "Jika akurasi latih 100% tetapi validasi 80%, apa yang terjadi dan apa yang akan Anda coba?"],
+      err: ["ValueError tentang input shape: cetak Xn.shape dan pastikan (N, 50, 3), bukan (N, 3, 50).", "Total params tidak 545: periksa jumlah filter dan ukuran kernel.", "Kode ini belum saya jalankan; jika error muncul akibat versi TensorFlow atau Keras, salin pesan errornya dan kita perbaiki."] },
+
+    { n: 9, title: "Kuantisasi int8 dan persiapan untuk ESP32", week: "Minggu 16-17", dur: "± 4 jam",
+      goal: "Mengubah model float32 menjadi int8, memeriksa penurunan akurasi, dan membuat berkas array C untuk firmware.",
+      concepts: [
+        "Kuantisasi post-training mengubah bobot dan aktivasi dari float32 (4 byte) ke int8 (1 byte). Bobot CNN 545 parameter turun dari sekitar 2,2 KB menjadi sekitar 0,5 KB; ukuran berkas .tflite lebih besar karena menyimpan struktur model, jadi ukur sendiri dengan len(tflite).",
+        "Konversi membutuhkan dataset representatif: beberapa ratus jendela latih agar konverter tahu rentang nilai tiap lapisan.",
+        "Masukan int8 memakai skala dan titik nol: xq = round(x / skala + titik_nol). Di firmware ESP32, langkah normalisasi (mu, sd dari norm.npz) dan kuantisasi masukan ini harus ditulis ulang persis sama.",
+        "Selalu bandingkan akurasi int8 dengan float32 pada data uji yang sama. Selisih besar berarti dataset representatif kurang baik atau model terlalu sensitif.",
+        "Perintah xxd -i mengubah berkas .tflite menjadi array C yang dimasukkan ke proyek TensorFlow Lite Micro di minggu 17."
+      ],
+      untested: true,
+      file: "l9_kuantisasi.py",
+      code: `import numpy as np
+import tensorflow as tf
+from tensorflow import keras
+
+model = keras.models.load_model("model.keras")
+d = np.load("jendela.npz"); n = np.load("norm.npz")
+Xr, y, grup = d["Xr"], d["y"], d["grup"]
+te = np.isin(grup, ["g08", "g09", "s08", "s09"])
+va = np.isin(grup, ["g06", "g07", "s06", "s07"])
+tr = ~(te | va)
+Xn = ((Xr - n["mu"]) / n["sd"]).astype("float32")
+
+def data_wakil():
+    for i in range(0, 200, 2):
+        yield [Xn[tr][i:i + 1]]
+
+conv = tf.lite.TFLiteConverter.from_keras_model(model)
+conv.optimizations = [tf.lite.Optimize.DEFAULT]
+conv.representative_dataset = data_wakil
+conv.target_spec.supported_ops = [tf.lite.OpsSet.TFLITE_BUILTINS_INT8]
+conv.inference_input_type = tf.int8
+conv.inference_output_type = tf.int8
+tflite = conv.convert()
+open("model_int8.tflite", "wb").write(tflite)
+print("ukuran file (byte):", len(tflite))
+
+ip = tf.lite.Interpreter(model_content=tflite)
+ip.allocate_tensors()
+din = ip.get_input_details()[0]; dout = ip.get_output_details()[0]
+s_in, z_in = din["quantization"]
+s_out, z_out = dout["quantization"]
+benar = 0
+for x, label in zip(Xn[te], y[te]):
+    xq = np.round(x / s_in + z_in).astype(np.int8)[None]
+    ip.set_tensor(din["index"], xq)
+    ip.invoke()
+    p = (ip.get_tensor(dout["index"])[0, 0] - z_out) * s_out
+    benar += (p > 0.5) == (label == "goyang")
+print("akurasi int8:", benar / len(te))
+
+# lalu di terminal (Linux, macOS, atau sel Colab diawali tanda seru):
+#   xxd -i model_int8.tflite > model_data.h`,
+      out: "Belum dijalankan di sini, jadi tidak ada keluaran yang bisa saya jamin.\nYang perlu Anda catat sendiri: ukuran file (byte), akurasi int8 dibandingkan akurasi float32 dari pelajaran 8, dan ukuran skala serta titik nol masukan.",
+      test: ["Berapa kali lebih kecil bobot int8 dibanding float32? (4 kali)", "Mengapa mu dan sd harus ikut disalin ke firmware?", "Apa yang Anda lakukan jika akurasi int8 turun jauh dari float32? (perbesar dataset representatif, coba quantization-aware training)"],
+      err: ["Konverter menolak operator tertentu: cek daftar operator yang didukung TensorFlow Lite Micro sebelum memilih arsitektur.", "Akurasi int8 anjlok karena dataset representatif terlalu sedikit atau tidak mewakili data nyata.", "Lupa bahwa normalisasi di firmware harus identik dengan di Python."] }
+  ];
+
+  /* teori yang wajib dikuasai dan langkah praktikum per pelajaran */
+  var TPM = {
+    0: { t: ["Data tabular: baris adalah satu sampel waktu, kolom adalah satu besaran dengan satuannya", "Laju sampel dan durasi menentukan jumlah baris: N = fs × T", "Gravitasi 1 g muncul di sumbu yang menghadap ke bawah saat sensor diam", "Seed acak dan reproduksibilitas: seed sama memberi data sama"],
+      p: ["Buat folder kerja dan lingkungan (Colab atau venv), lalu pasang pustaka", "Simpan l0_buat_data.py, jalankan, dan buka sensor.csv", "Periksa ada enam kolom dan 30000 baris", "Ubah fs menjadi 100, prediksi jumlah baris (60000) sebelum menjalankan, lalu cocokkan", "Kembalikan fs ke 50 dan jalankan lagi agar pelajaran berikutnya sesuai"] },
+    1: { t: ["Tipe data, list, dictionary, dan fungsi", "Generator ekspresi, misalnya sum(v * v for v in x)", "Rata-rata dan RMS (akar rata-rata kuadrat); RMS mengukur besar getaran", "Membaca pesan error Python dari baris terakhir ke atas"],
+      p: ["Jalankan dan cocokkan keluaran: 27.175 dan 27.176", "Hitung rata-rata empat suhu dengan tangan dan pastikan hasilnya 27,175", "Tulis fungsi simpangan baku sendiri tanpa pustaka dan bandingkan dengan statistics.pstdev dari pustaka standar Python", "Buat list [1, -1, 1, -1]: tunjukkan rata-rata 0 tetapi RMS 1", "Tambahkan kelas ketiga ke dictionary dan cetak"] },
+    2: { t: ["ndarray: shape, dtype, indeks, slicing", "axis: arah perhitungan", "Operasi vektor dan broadcasting", "Perbedaan ddof pada simpangan baku"],
+      p: ["Sebelum menjalankan, tebak shape tiap hasil print, lalu cocokkan", "Ganti axis=0 menjadi axis=1 dan jelaskan mengapa shape berubah", "Bandingkan waktu loop Python dan operasi vektor pada array 1 juta elemen memakai time.perf_counter", "Hitung np.std dengan ddof=1 dan bandingkan dengan hasil pandas", "Tulis satu paragraf: kapan memakai operasi vektor dan kapan loop"] },
+    3: { t: ["DataFrame: kolom bernama dan indeks", "groupby dan agg untuk ringkasan per kelas", "DatetimeIndex, rolling, dan resample", "Data hilang (NaN): cara mendeteksi dan menanganinya"],
+      p: ["Jalankan dan cocokkan tabel ringkasan per kelas", "Hitung RMS ax per sesi dengan groupby lalu urutkan; sesi goyang seharusnya berada di puncak", "Ubah beberapa nilai ax menjadi NaN, isi dengan interpolate, dan bandingkan statistik sebelum dan sesudah", "Ubah rolling('1s') menjadi rolling('0.5s') dan amati perubahannya", "Simpan ringkasan sebagai CSV baru"] },
+    4: { t: ["Membaca grafik deret waktu: sumbu, satuan, skala", "Histogram menunjukkan sebaran nilai dan tumpang tindih antar kelas", "Sampel per siklus: 50 Hz / 3 Hz kira-kira 17 sampel per siklus", "Spektrum frekuensi (FFT) menunjukkan frekuensi dominan sinyal"],
+      p: ["Jalankan dan buka sinyal.png serta hist.png", "Tulis tiga perbedaan antara grafik diam dan goyang", "Latihan tanpa kode siap pakai: hitung spektrum satu sesi goyang dengan np.fft.rfft dan np.fft.rfftfreq(n, d=1/50), lalu cari frekuensi puncak. Pada sesi g00 hasil saya sekitar 3,7 Hz, dalam rentang 2-4 Hz yang dipakai generator", "Buat grafik spektrum dengan sumbu berlabel (Hz)", "Bandingkan spektrum sesi diam dan goyang"] },
+    5: { t: ["Jendela waktu: panjang, langkah, dan tumpang tindih", "Fitur domain waktu: rata-rata, simpangan baku, minimum, maksimum, RMS", "Jumlah jendela per sesi = (panjang sinyal − N) / langkah + 1", "RAM jendela = N × jumlah kanal × byte per nilai"],
+      p: ["Jalankan dan cocokkan (1180, 50, 3) dan (1180, 15)", "Ubah N menjadi 100 dan LANGKAH menjadi 50, lalu prediksi jumlah jendela (29 per sesi × 20 sesi = 580) sebelum menjalankan. Hasil saya: (580, 100, 3)", "Hitung RAM satu jendela dalam float32 dan int8 untuk N = 50 (600 dan 150 byte) dan N = 100 (1200 dan 300 byte)", "Tambahkan satu fitur baru (misalnya rentang = maks − min) dan lihat perubahan shape", "Kembalikan ke N = 50 dan LANGKAH = 25 agar pelajaran berikutnya sesuai"] },
+    6: { t: ["Pembagian latih, validasi, dan uji serta kebocoran data", "Pohon keputusan: belahan berdasarkan fitur, kedalaman, dan overfitting", "Presisi, recall, F1, dan matriks konfusi", "Mengapa skor sempurna perlu dicurigai"],
+      p: ["Jalankan dan cocokkan keluaran", "Buat data lebih sulit: ubah rng.uniform(0.5, 1.5) di pelajaran 0 menjadi rng.uniform(0.05, 0.15), lalu jalankan ulang pelajaran 0, 5, dan 6. Hasil saya: F1 validasi 0,923, F1 uji 0,987, pohon berkedalaman 3 dengan 6 daun, dan 3 kesalahan dari 236 jendela uji", "Perhatikan bahwa F1 validasi dan uji berbeda: tiap kumpulan hanya berisi empat sesi sehingga skornya naik-turun. Itu alasan memakai lebih banyak sesi dan validasi silang pada data nyata", "Ubah max_depth menjadi 1, 2, dan 6 dan catat F1 validasi", "Kembalikan data ke versi awal bila ingin mencocokkan keluaran lain di halaman ini"] },
+    7: { t: ["Neuron, bobot, bias, ReLU, dan sigmoid", "Kerugian cross-entropy dan gradien", "Laju belajar, jumlah epoch, dan ukuran lapisan tersembunyi", "Normalisasi masukan"],
+      p: ["Jalankan di data awal dan cocokkan keluaran", "Beralih ke data sulit (lihat praktikum Modul 6) dan jalankan lagi. Hasil saya dengan pengaturan awal: akurasi validasi 0,881 (epoch 150) dan akurasi uji 0,992", "Ubah lr menjadi 10: validasi 0,903 dan uji 0,979", "Ubah lr menjadi 0,0001: validasi 0,517 dan uji 0,462; model hampir tidak belajar dalam 200 epoch", "Ubah H menjadi 2 (35 parameter): validasi 0,835 dan uji 0,966", "Hapus normalisasi: validasi 0,780 dan uji 0,894", "Tiap kumpulan hanya empat sesi, jadi jangan menarik kesimpulan kuat dari selisih kecil; tulis satu paragraf tentang pengaturan yang pengaruhnya paling jelas"] },
+    8: { t: ["Konvolusi 1D: filter bergeser sepanjang waktu untuk mendeteksi pola lokal", "Panjang keluaran = panjang masukan − kernel + 1 (tanpa padding)", "Pooling mengecilkan panjang; GlobalAveragePooling merata-ratakan sepanjang waktu", "Jumlah parameter Conv1D = kernel × kanal masuk × jumlah filter + jumlah filter"],
+      p: ["Hitung dengan tangan bentuk keluaran dan jumlah parameter tiap lapisan, lalu cocokkan dengan model.summary()", "Jalankan pelatihan di Colab dan catat akurasi validasi tiap epoch", "Ubah jumlah filter pertama menjadi 4 dan 16, lalu catat parameter dan akurasi", "Susun tabel pembanding dengan jaringan NumPy (137 parameter) dan pohon keputusan: parameter dan F1", "Kode ini belum saya jalankan; laporkan error bila ada"] },
+    9: { t: ["Kuantisasi afin: q = round(x / s) + z", "PTQ vs QAT", "Dataset representatif", "FlatBuffer dan array C", "Normalisasi dan kuantisasi masukan harus identik di Python dan firmware"],
+      p: ["Jalankan konversi dan catat ukuran berkas serta akurasi int8", "Bandingkan akurasi dengan float32 dari pelajaran 8", "Ubah ukuran dataset representatif (misalnya 20 dan 200 jendela) dan catat perubahannya", "Tampilkan skala dan titik nol masukan, lalu tulis rumus kuantisasi masukan dalam C di kertas", "Jalankan xxd -i dan periksa ukuran array C", "Kode ini belum saya jalankan; laporkan error bila ada"] }
+  };
+
+  var host = document.getElementById("modlist"), h = "";
+  MOD.forEach(function (m) {
+    h += '<details class="mod" id="mod' + m.n + '"><summary><span class="mn">' + (m.n < 10 ? "0" : "") + m.n + '</span><span class="mt"><small>Dipakai di ' + esc(m.week) + '</small>' + esc(m.title) + '</span><span class="mdur">' + esc(m.dur) + ' (perkiraan)</span></summary><div class="mb">';
+    h += '<div><h4>Tujuan</h4><p>' + esc(m.goal) + '</p></div>';
+    h += '<div><h4>Penjelasan</h4><ul>' + m.concepts.map(function (c) { return '<li>' + esc(c) + '</li>'; }).join("") + '</ul></div>';
+    h += '<div><h4>Teori yang perlu dikuasai</h4><ul>' + TPM[m.n].t.map(function (c) { return '<li>' + esc(c) + '</li>'; }).join("") + '</ul></div>';
+    if (m.untested) h += '<div class="warn"><b>Belum dijalankan di sini</b><p>TensorFlow tidak bisa dipasang di lingkungan saya, jadi kode ini belum saya uji. Jalankan di Colab dan beri tahu saya bila ada error.</p></div>';
+    h += '<div class="codewrap"><div class="codebar"><span>' + esc(m.file) + '</span><button type="button" class="copy">Salin</button></div><pre class="code">' + esc(m.code) + '</pre></div>';
+    h += '<div class="codewrap res"><div class="codebar"><span>Hasil yang seharusnya</span></div><pre class="code">' + esc(m.out) + '</pre></div>';
+    h += '<div><h4>Praktikum: langkah yang menerapkan teori</h4><ol>' + TPM[m.n].p.map(function (c) { return '<li>' + esc(c) + '</li>'; }).join("") + '</ol></div>';
+    h += '<div><h4>Uji diri</h4><ul>' + m.test.map(function (c) { return '<li>' + esc(c) + '</li>'; }).join("") + '</ul></div>';
+    h += '<div><h4>Kesalahan yang sering terjadi</h4><ul>' + m.err.map(function (c) { return '<li>' + esc(c) + '</li>'; }).join("") + '</ul></div>';
+    h += '</div></details>';
+  });
+  host.innerHTML = h;
+
+  host.addEventListener("click", function (e) {
+    var b = e.target.closest ? e.target.closest("button.copy") : null;
+    if (!b) return;
+    var pre = b.closest(".codewrap").querySelector("pre");
+    var txt = pre.textContent;
+    function done(ok) { b.textContent = ok ? "Tersalin" : "Pilih dan salin manual"; setTimeout(function () { b.textContent = "Salin"; }, 1800); }
+    function fallback() {
+      try {
+        var r = document.createRange(); r.selectNodeContents(pre);
+        var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+      } catch (x) {}
+      done(false);
+    }
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(txt).then(function () { done(true); }, fallback);
+      } else { fallback(); }
+    } catch (x) { fallback(); }
+  });
+})();
+</script>
+<script>
+(function () {
+  function $(id) { return document.getElementById(id); }
+  function esc(s) { return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); }
+  function norm(s) { return s.replace(/\s+/g, " ").trim(); }
+  function reEsc(s) { return s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"); }
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  function isDrawer() { return window.matchMedia ? window.matchMedia("(max-width: 1019px)").matches : false; }
+
+  /* ---- tema: otomatis, terang, gelap ---- */
+  var KEY = "pj-tema", root = document.documentElement;
+  function getS() { try { return localStorage.getItem(KEY); } catch (e) { return null; } }
+  function setS(v) { try { localStorage.setItem(KEY, v); } catch (e) {} }
+  var tbtns = document.querySelectorAll(".theme button");
+  function mark(t) { tbtns.forEach(function (b) { b.setAttribute("aria-pressed", b.getAttribute("data-t") === t ? "true" : "false"); }); }
+  function apply(t) {
+    if (t === "light" || t === "dark") root.setAttribute("data-theme", t); else root.removeAttribute("data-theme");
+    mark(t);
+  }
+  var st = getS();
+  if (st === "light" || st === "dark") apply(st); else mark(root.getAttribute("data-theme") || "auto");
+  tbtns.forEach(function (b) { b.addEventListener("click", function () { var t = b.getAttribute("data-t"); setS(t); apply(t); }); });
+
+  /* ---- menu geser di layar sempit ---- */
+  var side = $("side"), scrim = $("scrim"), mbtn = $("menubtn");
+  function openSide(o) {
+    side.classList.toggle("open", o); scrim.hidden = !o;
+    mbtn.setAttribute("aria-expanded", o ? "true" : "false");
+  }
+  mbtn.addEventListener("click", function () { openSide(!side.classList.contains("open")); });
+  scrim.addEventListener("click", function () { openSide(false); });
+  $("sideclose").addEventListener("click", function () { openSide(false); });
+
+  /* ---- pindah ke elemen (membuka panel yang tertutup) ---- */
+  function go(el, flash) {
+    for (var n = el; n; n = n.parentElement) { if (n.tagName === "DETAILS") n.open = true; }
+    if (isDrawer()) openSide(false);
+    requestAnimationFrame(function () {
+      el.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
+      if (flash) { el.classList.add("flash"); setTimeout(function () { el.classList.remove("flash"); }, 1600); }
+    });
+  }
+
+  /* ---- daftar isi ---- */
+  var secs = [["cara", "Cara belajar"], ["tahap", "Tahap 0-6"], ["modul", "Modul Python dan ML"], ["istilah", "Istilah"], ["kebiasaan", "Kebiasaan"]];
+  var kids = { tahap: [], modul: [] };
+  document.querySelectorAll("#stages details.stage").forEach(function (d) {
+    kids.tahap.push([d.id, d.querySelector(".node").textContent + ". " + norm(d.querySelector("h3").textContent)]);
+  });
+  document.querySelectorAll("#modlist details.mod").forEach(function (d) {
+    var mt = d.querySelector(".mt"), sm = mt.querySelector("small");
+    kids.modul.push([d.id, d.querySelector(".mn").textContent + ". " + norm(mt.textContent.slice(sm.textContent.length))]);
+  });
+  var th = "<ul>";
+  secs.forEach(function (s) {
+    th += '<li><a class="l1" href="#' + s[0] + '" data-go="' + s[0] + '">' + esc(s[1]) + '</a>';
+    if (kids[s[0]] && kids[s[0]].length) {
+      th += "<ul>";
+      kids[s[0]].forEach(function (k) { th += '<li><a href="#' + k[0] + '" data-go="' + k[0] + '">' + esc(k[1]) + '</a></li>'; });
+      th += "</ul>";
+    }
+    th += "</li>";
+  });
+  th += "</ul>";
+  var toc = $("toc");
+  toc.insertAdjacentHTML("beforeend", th);
+  toc.addEventListener("click", function (e) {
+    var a = e.target.closest ? e.target.closest("a[data-go]") : null;
+    if (!a) return;
+    e.preventDefault();
+    var el = $(a.getAttribute("data-go"));
+    if (el) go(el, false);
+  });
+
+  /* ---- penanda bagian aktif ---- */
+  var order = [], links = {};
+  secs.forEach(function (s) {
+    order.push({ id: s[0], parent: null });
+    (kids[s[0]] || []).forEach(function (k) { order.push({ id: k[0], parent: s[0] }); });
+  });
+  toc.querySelectorAll("a[data-go]").forEach(function (a) { links[a.getAttribute("data-go")] = a; });
+  var ticking = false;
+  function update() {
+    ticking = false;
+    var cur = null;
+    for (var i = 0; i < order.length; i++) {
+      var el = $(order[i].id);
+      if (el && el.getBoundingClientRect().top <= 150) cur = order[i];
+    }
+    toc.querySelectorAll("a.active, a.parent").forEach(function (a) { a.classList.remove("active"); a.classList.remove("parent"); });
+    if (!cur) return;
+    var a = links[cur.id];
+    if (a) a.classList.add("active");
+    if (cur.parent && links[cur.parent]) links[cur.parent].classList.add("parent");
+    if (a && !$("results").hidden === false && a.offsetParent) {
+      var top = a.offsetTop, bot = top + a.offsetHeight;
+      if (top < side.scrollTop + 60) side.scrollTop = Math.max(0, top - 60);
+      else if (bot > side.scrollTop + side.clientHeight - 20) side.scrollTop = bot - side.clientHeight + 20;
+    }
+  }
+  function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(update); } }
+  window.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("resize", onScroll);
+  update();
+
+  /* ---- pencarian ---- */
+  var idx = [];
+  function add(el, label, title, group) { idx.push({ el: el, label: label, title: title, group: group, text: norm(el.textContent) }); }
+  document.querySelectorAll("#stages .item").forEach(function (it) {
+    var sp = it.querySelector(".ih span"), sm = sp.querySelector("small"), lab = sm.textContent;
+    var det = it.closest("details.stage");
+    add(it, lab, norm(sp.textContent.slice(lab.length)), "Tahap " + det.querySelector(".node").textContent);
+  });
+  document.querySelectorAll("#modlist details.mod").forEach(function (d) {
+    var mt = d.querySelector(".mt"), sm = mt.querySelector("small");
+    add(d, "Modul " + d.querySelector(".mn").textContent, norm(mt.textContent.slice(sm.textContent.length)), "Modul Python dan ML");
+  });
+  document.querySelectorAll("#gl > div").forEach(function (d) { add(d, "Istilah", d.querySelector("dt").textContent, "Istilah"); });
+  document.querySelectorAll(".hab > div").forEach(function (d) { add(d, "Kebiasaan", d.querySelector("b").textContent, "Kebiasaan"); });
+  document.querySelectorAll("ol.steps li").forEach(function (d) { var b = d.querySelector("b"); add(d, "Cara belajar", b ? b.textContent : "", "Cara belajar"); });
+
+  var q = $("q"), res = $("results"), rl = $("reslist"), rc = $("rescount");
+  var hits = [];
+  function hl(s, re) {
+    var out = "", last = 0, m;
+    re.lastIndex = 0;
+    while ((m = re.exec(s)) !== null) {
+      if (m[0] === "") { re.lastIndex++; continue; }
+      out += esc(s.slice(last, m.index)) + "<mark>" + esc(m[0]) + "</mark>";
+      last = m.index + m[0].length;
+    }
+    return out + esc(s.slice(last));
+  }
+  function run() {
+    var v = q.value.trim().toLowerCase();
+    if (!v) { res.hidden = true; toc.hidden = false; hits = []; return; }
+    var toks = v.split(/\s+/).filter(Boolean);
+    var re = new RegExp(toks.map(reEsc).join("|"), "gi");
+    hits = [];
+    idx.forEach(function (e, i) {
+      var low = e.text.toLowerCase();
+      if (!toks.every(function (t) { return low.indexOf(t) >= 0; })) return;
+      var tl = (e.label + " " + e.title).toLowerCase();
+      var inT = toks.every(function (t) { return tl.indexOf(t) >= 0; });
+      var pos = Math.min.apply(null, toks.map(function (t) { return low.indexOf(t); }));
+      hits.push({ e: e, i: i, s: inT ? 0 : 1, pos: pos });
+    });
+    hits.sort(function (a, b) { return a.s - b.s || a.i - b.i; });
+    var total = hits.length;
+    hits = hits.slice(0, 40);
+    toc.hidden = true; res.hidden = false;
+    if (!total) { rc.textContent = "Tidak ada hasil untuk “" + q.value.trim() + "”. Coba kata lain atau lebih sedikit kata."; rl.innerHTML = ""; return; }
+    rc.textContent = total + " hasil" + (total > 40 ? " (40 teratas ditampilkan)" : "");
+    var h = "";
+    hits.forEach(function (x, n) {
+      var s0 = Math.max(0, x.pos - 30), snip = x.e.text.slice(s0, s0 + 100);
+      h += '<li><a href="#" data-n="' + n + '"><small>' + esc(x.e.group) + '</small><b>' + hl(x.e.label + " · " + x.e.title, re) + '</b><span>' + (s0 > 0 ? "…" : "") + hl(snip, re) + (s0 + 100 < x.e.text.length ? "…" : "") + '</span></a></li>';
+    });
+    rl.innerHTML = h;
+  }
+  q.addEventListener("input", run);
+  rl.addEventListener("click", function (e) {
+    var a = e.target.closest ? e.target.closest("a[data-n]") : null;
+    if (!a) return;
+    e.preventDefault();
+    var x = hits[Number(a.getAttribute("data-n"))];
+    if (x) go(x.e.el, true);
+  });
+  q.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") { q.value = ""; run(); q.blur(); }
+    else if (e.key === "Enter") { var first = rl.querySelector("a"); if (first) { e.preventDefault(); first.click(); } }
+    else if (e.key === "ArrowDown") { var f = rl.querySelector("a"); if (f) { e.preventDefault(); f.focus(); } }
+  });
+  rl.addEventListener("keydown", function (e) {
+    var a = document.activeElement;
+    if (e.key === "ArrowDown" && a && a.parentElement && a.parentElement.nextElementSibling) { e.preventDefault(); a.parentElement.nextElementSibling.querySelector("a").focus(); }
+    else if (e.key === "ArrowUp") { e.preventDefault(); var p = a && a.parentElement && a.parentElement.previousElementSibling; if (p) p.querySelector("a").focus(); else q.focus(); }
+  });
+  document.addEventListener("keydown", function (e) {
+    var t = document.activeElement ? document.activeElement.tagName : "";
+    if (e.key === "/" && !/INPUT|TEXTAREA|SELECT/.test(t) && !e.ctrlKey && !e.metaKey && !e.altKey) {
+      e.preventDefault();
+      if (isDrawer()) openSide(true);
+      q.focus();
+    } else if (e.key === "Escape" && side.classList.contains("open")) { openSide(false); }
+  });
+})();
+</script>
